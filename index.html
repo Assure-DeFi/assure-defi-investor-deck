@@ -7,728 +7,925 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0A0724;
-    --navy-light: #0F0B30;
-    --gold: #E2D243;
-    --gold-dim: rgba(226, 210, 67, 0.15);
-    --gold-border: rgba(226, 210, 67, 0.3);
-    --white: #FFFFFF;
-    --grey: #F2F2F2;
-    --grey-dim: rgba(242, 242, 242, 0.6);
-    --black: #000000;
-    --card: #0D0A28;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-  }
-
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--navy);
-    color: var(--white);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* ── Slide Container ── */
-  .slide {
-    min-height: 100vh;
-    min-height: 100dvh;
-    padding: 48px 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    border-bottom: 1px solid var(--gold-border);
-  }
-
-  @media (min-width: 768px) {
-    .slide { padding: 64px 48px; }
-  }
-  @media (min-width: 1024px) {
-    .slide { padding: 80px 96px; }
-  }
-
-  .slide-inner {
-    max-width: 960px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  /* ── Typography ── */
-  .slide-number {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-
-  h1 {
-    font-size: clamp(32px, 6vw, 56px);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -1px;
-    margin-bottom: 24px;
-  }
-
-  h2 {
-    font-size: clamp(26px, 4.5vw, 44px);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.5px;
-    margin-bottom: 20px;
-  }
-
-  h3 {
-    font-size: clamp(18px, 3vw, 24px);
-    font-weight: 600;
-    line-height: 1.3;
-    margin-bottom: 12px;
-  }
-
-  .subtitle {
-    font-size: clamp(16px, 2.5vw, 22px);
-    font-weight: 400;
-    color: var(--grey);
-    line-height: 1.5;
-    margin-bottom: 32px;
-  }
-
-  .gold { color: var(--gold); }
-  .dim { color: var(--grey-dim); }
-
-  p { margin-bottom: 16px; color: var(--grey); font-size: 15px; }
-
-  /* ── Gold Divider ── */
-  .divider {
-    width: 80px;
-    height: 3px;
-    background: var(--gold);
-    margin: 24px 0;
-  }
-
-  /* ── Cards ── */
-  .card {
-    background: var(--black);
-    border: 1px solid var(--gold-border);
-    border-radius: 8px;
-    padding: 24px;
-    margin-bottom: 16px;
-  }
-
-  .card-gold {
-    border-color: var(--gold);
-  }
-
-  .card h3 {
-    color: var(--gold);
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 12px;
-  }
-
-  /* ── Stats Grid ── */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 24px 0;
-  }
-
-  @media (min-width: 768px) {
-    .stats-grid { grid-template-columns: repeat(3, 1fr); }
-    .stats-grid-4 { grid-template-columns: repeat(4, 1fr); }
-  }
-
-  .stat {
-    background: var(--black);
-    border: 1px solid var(--gold-border);
-    border-radius: 8px;
-    padding: 20px 16px;
-    text-align: center;
-  }
-
-  .stat-value {
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: 800;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-
-  .stat-label {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--grey-dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* ── Feature Cards ── */
-  .features-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin: 24px 0;
-  }
-
-  @media (min-width: 768px) {
-    .features-grid { grid-template-columns: 1fr 1fr; }
-  }
-
-  @media (min-width: 1024px) {
-    .features-grid-3 { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  .feature-card {
-    background: var(--black);
-    border: 1px solid var(--gold-border);
-    border-radius: 8px;
-    padding: 24px;
-  }
-
-  .feature-card .icon {
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--gold);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-    font-size: 18px;
-    color: var(--gold);
-    font-weight: 700;
-  }
-
-  .feature-card h4 {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-
-  .feature-card p {
-    font-size: 14px;
-    color: var(--grey-dim);
-    margin: 0;
-    line-height: 1.5;
-  }
-
-  /* ── Bullet List ── */
-  .bullet-list {
-    list-style: none;
-    padding: 0;
-  }
-
-  .bullet-list li {
-    position: relative;
-    padding-left: 20px;
-    margin-bottom: 12px;
-    font-size: 15px;
-    color: var(--grey);
-    line-height: 1.5;
-  }
-
-  .bullet-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 8px;
-    width: 8px;
-    height: 8px;
-    background: var(--gold);
-    border-radius: 2px;
-  }
-
-  .bullet-list li strong { color: var(--white); }
-
-  /* ── Table ── */
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 16px 0;
-    font-size: 14px;
-  }
-
-  .data-table th {
-    text-align: left;
-    padding: 12px 16px;
-    background: var(--black);
-    color: var(--gold);
-    font-weight: 600;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 2px solid var(--gold-border);
-  }
-
-  .data-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    color: var(--grey);
-  }
-
-  .data-table tr:hover td { background: rgba(226, 210, 67, 0.03); }
-
-  /* ── Timeline ── */
-  .timeline {
-    position: relative;
-    padding-left: 24px;
-    margin: 24px 0;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 4px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--gold-border);
-  }
-
-  .timeline-item {
-    position: relative;
-    margin-bottom: 32px;
-  }
-
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -24px;
-    top: 4px;
-    width: 10px;
-    height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    border: 2px solid var(--navy);
-  }
-
-  .timeline-item.done::before {
-    background: var(--gold);
-  }
-
-  .timeline-item.current::before {
-    background: var(--gold);
-    box-shadow: 0 0 0 4px rgba(226, 210, 67, 0.3);
-  }
-
-  .timeline-item.future::before {
-    background: transparent;
-    border-color: var(--gold-border);
-  }
-
-  .timeline-label {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--gold);
-    margin-bottom: 4px;
-  }
-
-  .timeline-title {
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-
-  .timeline-desc {
-    font-size: 14px;
-    color: var(--grey-dim);
-    line-height: 1.4;
-  }
-
-  /* ── Funnel ── */
-  .funnel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    margin: 24px 0;
-  }
-
-  .funnel-step {
-    background: var(--black);
-    border: 1px solid var(--gold-border);
-    border-radius: 6px;
-    padding: 12px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-  }
-
-  .funnel-step .label { color: var(--grey); }
-  .funnel-step .value { color: var(--gold); font-weight: 700; margin-left: 16px; }
-
-  .funnel-step.highlight {
-    background: var(--gold);
-    border-color: var(--gold);
-  }
-  .funnel-step.highlight .label { color: var(--navy); font-weight: 600; }
-  .funnel-step.highlight .value { color: var(--navy); }
-
-  .funnel-arrow {
-    color: var(--gold);
-    font-size: 14px;
-    opacity: 0.5;
-  }
-
-  /* ── Quote ── */
-  .quote-block {
-    border-left: 3px solid var(--gold);
-    padding: 16px 20px;
-    margin: 24px 0;
-    background: var(--gold-dim);
-    border-radius: 0 8px 8px 0;
-  }
-
-  .quote-block p {
-    color: var(--white);
-    font-size: 16px;
-    font-weight: 500;
-    font-style: italic;
-    line-height: 1.5;
-    margin: 0;
-  }
-
-  .quote-block .attribution {
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 400;
-    color: var(--grey-dim);
-    margin-top: 8px;
-  }
-
-  /* ── CTA section ── */
-  .cta-block {
-    background: var(--black);
-    border: 2px solid var(--gold);
-    border-radius: 12px;
-    padding: 32px;
-    text-align: center;
-    margin: 32px 0;
-  }
-
-  .cta-block h3 {
-    color: var(--gold);
-    font-size: 20px;
-    margin-bottom: 12px;
-  }
-
-  /* ── Pill Tags ── */
-  .tag {
-    display: inline-block;
-    padding: 4px 12px;
-    border: 1px solid var(--gold-border);
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--gold);
-    margin: 4px;
-  }
-
-  .tag-solid {
-    background: var(--gold);
-    color: var(--navy);
-    border-color: var(--gold);
-    font-weight: 600;
-  }
-
-  /* ── Competitor Grid ── */
-  .comp-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin: 16px 0;
-  }
-
-  @media (min-width: 768px) {
-    .comp-grid { grid-template-columns: 1fr 1fr; }
-  }
-
-  .comp-item {
-    background: var(--black);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 8px;
-    padding: 16px;
-  }
-
-  .comp-item .comp-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-
-  .comp-item .comp-val {
-    font-size: 13px;
-    color: var(--grey-dim);
-  }
-
-  /* ── Spacer ── */
-  .spacer { height: 32px; }
-
-  /* ── Progress Bar ── */
-  .progress-bar {
-    background: rgba(255,255,255,0.06);
-    border-radius: 4px;
-    height: 8px;
-    margin: 8px 0;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: var(--gold);
-    border-radius: 4px;
-  }
-
-  /* ── Navigation Dots ── */
-  .nav-dots {
-    position: fixed;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
-    display: none;
-  }
-
-  @media (min-width: 768px) {
-    .nav-dots { display: flex; flex-direction: column; gap: 8px; }
-  }
-
-  .nav-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(226, 210, 67, 0.3);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .nav-dot:hover, .nav-dot.active {
-    background: var(--gold);
-    transform: scale(1.3);
-  }
-
-  /* ── Two Column Layout ── */
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 32px;
-    align-items: start;
-  }
-
-  @media (min-width: 768px) {
-    .two-col { grid-template-columns: 1fr 1fr; }
-  }
-
-  /* ── Confidential Footer ── */
-  .footer-confidential {
-    text-align: center;
-    padding: 4px 0;
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--grey-dim);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border-top: 1px solid var(--gold-border);
-    margin-top: auto;
-    padding-top: 16px;
-  }
+:root {
+  --navy: #07051a;
+  --navy-mid: #0d0a2a;
+  --navy-card: #0a0820;
+  --gold: #E2D243;
+  --gold-bright: #f0e050;
+  --gold-dim: rgba(226,210,67,0.12);
+  --gold-border: rgba(226,210,67,0.25);
+  --gold-border-strong: rgba(226,210,67,0.5);
+  --white: #FFFFFF;
+  --grey: #c8c8d8;
+  --grey-dim: rgba(200,200,216,0.55);
+  --black-card: #050410;
+  --green: #4ade80;
+  --red: #f87171;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+
+body {
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--navy);
+  color:var(--white);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ─── SLIDE CONTAINER ─── */
+.slide {
+  min-height:100vh;
+  min-height:100dvh;
+  padding:56px 24px 48px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+  border-bottom:1px solid var(--gold-border);
+  overflow:hidden;
+}
+@media(min-width:768px){ .slide{ padding:72px 48px 56px; } }
+@media(min-width:1100px){ .slide{ padding:80px 96px 64px; } }
+
+.slide-inner {
+  max-width:1000px;
+  margin:0 auto;
+  width:100%;
+  position:relative;
+  z-index:2;
+}
+
+/* Background grid pattern */
+.slide::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(226,210,67,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(226,210,67,0.03) 1px, transparent 1px);
+  background-size:60px 60px;
+  z-index:0;
+}
+
+/* Glow accent */
+.slide-glow {
+  position:absolute;
+  width:600px;
+  height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(226,210,67,0.06) 0%, transparent 70%);
+  pointer-events:none;
+  z-index:1;
+}
+
+/* ─── TYPOGRAPHY ─── */
+.slide-label {
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.slide-label::after {
+  content:'';
+  flex:1;
+  max-width:40px;
+  height:1px;
+  background:var(--gold-border-strong);
+}
+
+h1 {
+  font-size:clamp(36px,6.5vw,64px);
+  font-weight:900;
+  line-height:1.05;
+  letter-spacing:-1.5px;
+  margin-bottom:20px;
+}
+h2 {
+  font-size:clamp(26px,4.5vw,46px);
+  font-weight:800;
+  line-height:1.1;
+  letter-spacing:-1px;
+  margin-bottom:16px;
+}
+h3 {
+  font-size:clamp(16px,2.5vw,22px);
+  font-weight:700;
+  line-height:1.25;
+  margin-bottom:10px;
+}
+h4 {
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:8px;
+  color:var(--white);
+}
+
+.subtitle {
+  font-size:clamp(15px,2.2vw,20px);
+  font-weight:400;
+  color:var(--grey);
+  line-height:1.55;
+  margin-bottom:28px;
+  max-width:780px;
+}
+
+.gold { color:var(--gold); }
+.dim { color:var(--grey-dim); }
+.green { color:var(--green); }
+
+p { margin-bottom:14px; color:var(--grey); font-size:14.5px; line-height:1.6; }
+p:last-child { margin-bottom:0; }
+
+/* ─── GOLD DIVIDER ─── */
+.divider {
+  width:64px;
+  height:3px;
+  background:linear-gradient(90deg, var(--gold), transparent);
+  margin:20px 0;
+  border-radius:2px;
+}
+
+/* ─── CARDS ─── */
+.card {
+  background:var(--black-card);
+  border:1px solid var(--gold-border);
+  border-radius:10px;
+  padding:22px;
+  margin-bottom:14px;
+}
+.card-gold { border-color:var(--gold-border-strong); }
+.card-highlight {
+  background:linear-gradient(135deg, rgba(226,210,67,0.08), rgba(226,210,67,0.02));
+  border-color:var(--gold);
+}
+
+/* ─── STAT GRID ─── */
+.stats-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin:20px 0;
+}
+@media(min-width:600px){ .stats-grid-3{ grid-template-columns:repeat(3,1fr); } }
+@media(min-width:768px){
+  .stats-grid-4{ grid-template-columns:repeat(4,1fr); }
+  .stats-grid-3{ grid-template-columns:repeat(3,1fr); }
+}
+
+.stat {
+  background:var(--black-card);
+  border:1px solid var(--gold-border);
+  border-radius:10px;
+  padding:20px 16px;
+  text-align:center;
+  transition:border-color 0.2s, transform 0.2s;
+}
+.stat:hover { border-color:var(--gold-border-strong); transform:translateY(-2px); }
+.stat-gold { border-color:var(--gold); }
+
+.stat-value {
+  font-size:clamp(28px,5vw,44px);
+  font-weight:900;
+  color:var(--gold);
+  line-height:1;
+  margin-bottom:8px;
+  letter-spacing:-1px;
+}
+.stat-label {
+  font-size:11px;
+  font-weight:500;
+  color:var(--grey-dim);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  line-height:1.4;
+}
+
+/* ─── FEATURE CARDS ─── */
+.features-grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  margin:20px 0;
+}
+@media(min-width:640px){ .features-grid{ grid-template-columns:1fr 1fr; } }
+@media(min-width:960px){ .features-grid-3{ grid-template-columns:repeat(3,1fr); } }
+
+.feature-card {
+  background:var(--black-card);
+  border:1px solid var(--gold-border);
+  border-radius:10px;
+  padding:22px;
+  transition:border-color 0.2s, transform 0.2s;
+}
+.feature-card:hover { border-color:var(--gold-border-strong); transform:translateY(-2px); }
+.feature-card-gold { border-color:var(--gold); }
+
+.feature-icon {
+  width:38px;
+  height:38px;
+  border:1.5px solid var(--gold);
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:14px;
+  font-size:16px;
+  font-weight:800;
+  color:var(--gold);
+  flex-shrink:0;
+}
+
+/* ─── BULLET LIST ─── */
+.bullet-list { list-style:none; padding:0; }
+.bullet-list li {
+  position:relative;
+  padding-left:18px;
+  margin-bottom:10px;
+  font-size:14px;
+  color:var(--grey);
+  line-height:1.55;
+}
+.bullet-list li::before {
+  content:'';
+  position:absolute;
+  left:0;
+  top:7px;
+  width:7px;
+  height:7px;
+  background:var(--gold);
+  border-radius:2px;
+  flex-shrink:0;
+}
+.bullet-list li strong { color:var(--white); }
+
+/* ─── TABLE ─── */
+.data-table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:13.5px;
+}
+.data-table th {
+  text-align:left;
+  padding:10px 14px;
+  background:rgba(226,210,67,0.07);
+  color:var(--gold);
+  font-weight:600;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  border-bottom:1px solid var(--gold-border);
+}
+.data-table td {
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  color:var(--grey);
+  vertical-align:top;
+}
+.data-table tr:last-child td { border-bottom:none; }
+.data-table tr:hover td { background:rgba(226,210,67,0.025); }
+.data-table .highlight-row td { color:var(--gold); font-weight:700; }
+.data-table .td-gold { color:var(--gold); font-weight:700; }
+.data-table .td-white { color:var(--white); font-weight:600; }
+
+/* ─── FUNNEL ─── */
+.funnel {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  margin:20px 0;
+}
+.funnel-step {
+  background:var(--black-card);
+  border:1px solid var(--gold-border);
+  border-radius:6px;
+  padding:11px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13.5px;
+  transition:border-color 0.2s;
+}
+.funnel-step:hover { border-color:var(--gold-border-strong); }
+.funnel-step .f-label { color:var(--grey); }
+.funnel-step .f-val { color:var(--gold); font-weight:700; margin-left:14px; white-space:nowrap; }
+.funnel-step.f-highlight {
+  background:var(--gold);
+  border-color:var(--gold);
+}
+.funnel-step.f-highlight .f-label { color:var(--navy); font-weight:700; }
+.funnel-step.f-highlight .f-val { color:var(--navy); }
+.funnel-arrow { color:var(--gold-border-strong); font-size:12px; line-height:1; }
+
+/* ─── QUOTE ─── */
+.quote-block {
+  border-left:3px solid var(--gold);
+  padding:16px 20px;
+  margin:20px 0;
+  background:var(--gold-dim);
+  border-radius:0 8px 8px 0;
+}
+.quote-block p {
+  color:var(--white);
+  font-size:clamp(14px,2vw,16px);
+  font-weight:500;
+  font-style:italic;
+  line-height:1.55;
+  margin:0;
+}
+.quote-block .attr {
+  font-size:12px;
+  font-style:normal;
+  font-weight:400;
+  color:var(--grey-dim);
+  margin-top:8px;
+}
+
+/* ─── CTA BLOCK ─── */
+.cta-block {
+  background:var(--black-card);
+  border:2px solid var(--gold);
+  border-radius:12px;
+  padding:32px;
+  text-align:center;
+  margin:28px 0;
+  position:relative;
+  overflow:hidden;
+}
+.cta-block::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at center, rgba(226,210,67,0.06) 0%, transparent 70%);
+}
+.cta-block h3 { color:var(--gold); font-size:clamp(18px,3vw,24px); margin-bottom:10px; position:relative; }
+.cta-block p { position:relative; }
+
+/* ─── TAGS ─── */
+.tag {
+  display:inline-block;
+  padding:4px 12px;
+  border:1px solid var(--gold-border);
+  border-radius:4px;
+  font-size:12px;
+  font-weight:500;
+  color:var(--gold);
+  margin:3px;
+}
+.tag-solid {
+  background:var(--gold);
+  color:var(--navy);
+  border-color:var(--gold);
+  font-weight:700;
+  font-size:13px;
+}
+.tag-green {
+  background:rgba(74,222,128,0.12);
+  border-color:rgba(74,222,128,0.4);
+  color:var(--green);
+}
+
+/* ─── PROGRESS BAR ─── */
+.progress-bar {
+  background:rgba(255,255,255,0.06);
+  border-radius:4px;
+  height:7px;
+  margin:8px 0;
+  overflow:hidden;
+}
+.progress-fill {
+  height:100%;
+  background:linear-gradient(90deg, var(--gold), var(--gold-bright));
+  border-radius:4px;
+  transition:width 1s ease;
+}
+
+/* ─── TIMELINE ─── */
+.timeline {
+  position:relative;
+  padding-left:28px;
+  margin:20px 0;
+}
+.timeline::before {
+  content:'';
+  position:absolute;
+  left:6px;
+  top:6px;
+  bottom:6px;
+  width:2px;
+  background:linear-gradient(to bottom, var(--gold), var(--gold-border));
+}
+.timeline-item {
+  position:relative;
+  margin-bottom:28px;
+}
+.timeline-item:last-child { margin-bottom:0; }
+.timeline-item::before {
+  content:'';
+  position:absolute;
+  left:-28px;
+  top:5px;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  border:2px solid var(--navy);
+}
+.timeline-item.done::before { background:var(--gold); border-color:var(--gold); box-shadow:0 0 0 3px rgba(226,210,67,0.2); }
+.timeline-item.active::before { background:var(--gold); border-color:var(--gold); box-shadow:0 0 0 5px rgba(226,210,67,0.25); animation:pulse 2s infinite; }
+.timeline-item.future::before { background:var(--navy-mid); border-color:var(--gold-border-strong); }
+
+@keyframes pulse {
+  0%,100%{ box-shadow:0 0 0 4px rgba(226,210,67,0.25); }
+  50%{ box-shadow:0 0 0 8px rgba(226,210,67,0.1); }
+}
+
+.tl-label {
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  color:var(--gold);
+  margin-bottom:3px;
+}
+.tl-title {
+  font-size:16px;
+  font-weight:700;
+  color:var(--white);
+  margin-bottom:4px;
+}
+.tl-desc {
+  font-size:13px;
+  color:var(--grey-dim);
+  line-height:1.45;
+}
+
+/* ─── TWO COLUMN ─── */
+.two-col {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:24px;
+  align-items:start;
+}
+@media(min-width:700px){ .two-col{ grid-template-columns:1fr 1fr; } }
+
+/* ─── COMPARISON TABLE ─── */
+.comp-check { color:var(--gold); font-weight:700; }
+.comp-no { color:var(--grey-dim); }
+
+/* ─── MOAT CARDS ─── */
+.moat-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin:20px 0;
+}
+@media(max-width:600px){ .moat-grid{ grid-template-columns:1fr; } }
+
+.moat-card {
+  background:var(--black-card);
+  border:1px solid var(--gold-border);
+  border-radius:10px;
+  padding:20px;
+  border-left:3px solid var(--gold);
+}
+.moat-card h4 { color:var(--gold); font-size:13px; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
+
+/* ─── CASE STUDY ─── */
+.case-grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+  margin:16px 0;
+}
+@media(min-width:640px){ .case-grid{ grid-template-columns:repeat(3,1fr); } }
+
+.case-card {
+  background:var(--black-card);
+  border:1px solid var(--gold-border);
+  border-radius:10px;
+  padding:18px;
+  text-align:center;
+}
+.case-card .case-name { font-size:15px; font-weight:700; color:var(--white); margin-bottom:6px; }
+.case-card .case-result { font-size:28px; font-weight:900; color:var(--gold); line-height:1; margin-bottom:6px; }
+.case-card .case-desc { font-size:12px; color:var(--grey-dim); line-height:1.4; }
+
+/* ─── ALLOCATION BARS ─── */
+.alloc-item {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:14px;
+}
+.alloc-label { min-width:160px; font-size:13px; font-weight:600; color:var(--white); }
+.alloc-bar-wrap { flex:1; background:rgba(255,255,255,0.05); border-radius:4px; height:8px; }
+.alloc-bar { height:100%; border-radius:4px; background:linear-gradient(90deg, var(--gold), var(--gold-bright)); }
+.alloc-pct { min-width:36px; text-align:right; font-size:13px; font-weight:700; color:var(--gold); }
+
+/* ─── VISION STAGES ─── */
+.vision-grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  margin:20px 0;
+}
+@media(min-width:640px){ .vision-grid{ grid-template-columns:repeat(3,1fr); } }
+
+.vision-card {
+  background:var(--black-card);
+  border:1px solid var(--gold);
+  border-radius:10px;
+  padding:24px;
+  position:relative;
+  overflow:hidden;
+}
+.vision-card::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:2px;
+  background:linear-gradient(90deg, var(--gold), transparent);
+}
+.vision-card .v-stage {
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:var(--gold);
+  margin-bottom:8px;
+}
+.vision-card h4 { font-size:16px; color:var(--gold); margin-bottom:10px; }
+
+/* ─── NAV DOTS ─── */
+.nav-dots {
+  position:fixed;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:200;
+  display:none;
+  flex-direction:column;
+  gap:7px;
+}
+@media(min-width:768px){ .nav-dots{ display:flex; } }
+
+.nav-dot {
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:rgba(226,210,67,0.25);
+  cursor:pointer;
+  transition:all 0.25s;
+  border:none;
+  padding:0;
+}
+.nav-dot:hover, .nav-dot.active {
+  background:var(--gold);
+  transform:scale(1.5);
+}
+.nav-dot.active { box-shadow:0 0 6px rgba(226,210,67,0.5); }
+
+/* ─── SLIDE COUNTER ─── */
+.slide-counter {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  font-size:11px;
+  font-weight:500;
+  color:var(--grey-dim);
+  letter-spacing:1px;
+  z-index:200;
+  background:rgba(7,5,26,0.8);
+  padding:4px 10px;
+  border-radius:20px;
+  border:1px solid var(--gold-border);
+  backdrop-filter:blur(8px);
+}
+
+/* ─── PROGRESS INDICATOR ─── */
+.reading-progress {
+  position:fixed;
+  top:0;
+  left:0;
+  height:2px;
+  background:var(--gold);
+  z-index:300;
+  transition:width 0.1s;
+}
+
+/* ─── CONFIDENTIAL FOOTER ─── */
+.footer-conf {
+  text-align:center;
+  padding-top:20px;
+  font-size:10px;
+  font-weight:500;
+  color:var(--grey-dim);
+  letter-spacing:2px;
+  text-transform:uppercase;
+  border-top:1px solid var(--gold-border);
+  margin-top:auto;
+}
+
+/* ─── COVER SPECIFIC ─── */
+.cover-badge {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1.5px solid var(--gold);
+  border-radius:10px;
+  padding:12px 28px;
+  margin-bottom:28px;
+}
+.cover-badge .brand { font-size:clamp(18px,3vw,26px); font-weight:900; letter-spacing:3px; }
+
+/* ─── ANIMATE ON SCROLL ─── */
+.anim {
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity 0.5s ease, transform 0.5s ease;
+}
+.anim.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+.anim-delay-1 { transition-delay:0.1s; }
+.anim-delay-2 { transition-delay:0.2s; }
+.anim-delay-3 { transition-delay:0.3s; }
+.anim-delay-4 { transition-delay:0.4s; }
+
+/* ─── SPACER ─── */
+.spacer { height:24px; }
+.spacer-sm { height:14px; }
+
+/* ─── SCROLLABLE TABLE WRAPPER ─── */
+.table-wrap { overflow-x:auto; }
+
+/* ─── CALLOUT ─── */
+.callout {
+  background:var(--gold-dim);
+  border:1px solid var(--gold-border-strong);
+  border-radius:8px;
+  padding:14px 18px;
+  margin:16px 0;
+  font-size:13.5px;
+  color:var(--white);
+  font-weight:500;
+}
+.callout strong { color:var(--gold); }
+
+/* ─── COVER HERO NUMBER ─── */
+.hero-number {
+  font-size:clamp(80px,15vw,140px);
+  font-weight:900;
+  color:var(--gold);
+  line-height:1;
+  letter-spacing:-4px;
+  opacity:0.08;
+  position:absolute;
+  right:-20px;
+  bottom:-20px;
+  pointer-events:none;
+  user-select:none;
+}
+
+/* ─── SECTION DIVIDER ─── */
+.section-divider {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:20px 0;
+}
+.section-divider span { font-size:12px; font-weight:600; color:var(--gold); text-transform:uppercase; letter-spacing:1.5px; white-space:nowrap; }
+.section-divider::before, .section-divider::after {
+  content:'';
+  flex:1;
+  height:1px;
+  background:var(--gold-border);
+}
+
+/* ─── RESPONSIVE TWEAKS ─── */
+@media(max-width:480px){
+  .stats-grid { grid-template-columns:1fr 1fr; }
+  .features-grid { grid-template-columns:1fr; }
+  .two-col { grid-template-columns:1fr; }
+  .moat-grid { grid-template-columns:1fr; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV DOTS -->
-<div class="nav-dots" id="navDots"></div>
+<!-- READING PROGRESS -->
+<div class="reading-progress" id="readingProgress"></div>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 1: COVER -->
-<!-- ═══════════════════════════════════════════════ -->
-<section class="slide" id="s1" style="text-align:center; justify-content:center;">
+<!-- NAV DOTS -->
+<nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+
+<!-- SLIDE COUNTER -->
+<div class="slide-counter" id="slideCounter">1 / 15</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 1: COVER                                     -->
+<!-- ══════════════════════════════════════════════════ -->
+<section class="slide" id="s1" style="text-align:center;justify-content:center;min-height:100vh;">
+  <div class="slide-glow" style="top:-100px;left:50%;transform:translateX(-50%);"></div>
   <div class="slide-inner">
-    <div style="margin-bottom:24px;">
-      <div style="display:inline-block;border:2px solid var(--gold);border-radius:12px;padding:16px 32px;">
-        <span style="font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:2px;">ASSURE<span class="gold"> DEFI</span></span>
+    <div class="anim" style="margin-bottom:28px;">
+      <div class="cover-badge">
+        <span class="brand">ASSURE<span class="gold"> DEFI</span></span>
       </div>
+      <div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--grey-dim);margin-top:8px;">The Verification Gold Standard™</div>
     </div>
 
-    <h1 style="font-size:clamp(36px,7vw,64px);margin-bottom:12px;">
+    <h1 class="anim anim-delay-1" style="font-size:clamp(56px,10vw,96px);letter-spacing:-3px;margin-bottom:10px;">
       Connect
     </h1>
-    <p style="font-size:clamp(16px,2.5vw,22px);color:var(--grey);margin-bottom:8px;font-weight:400;">
+
+    <p class="anim anim-delay-2" style="font-size:clamp(17px,2.8vw,24px);color:var(--grey);margin-bottom:6px;font-weight:400;max-width:600px;margin-left:auto;margin-right:auto;">
       AI-Powered Crypto Business Intelligence &amp; Autonomous Sales
     </p>
 
-    <div class="divider" style="margin:28px auto;"></div>
+    <div class="divider anim anim-delay-3" style="margin:28px auto;"></div>
 
-    <p style="font-size:14px;color:var(--grey-dim);margin-bottom:0;">
-      Confidential Investment Memorandum &mdash; March 2026
-    </p>
-    <p style="font-size:12px;color:var(--grey-dim);margin-top:4px;">
-      Prepared for selected investors
-    </p>
+    <div class="anim anim-delay-4" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:32px;">
+      <span class="tag">Confidential Investment Memorandum</span>
+      <span class="tag">March 2026</span>
+      <span class="tag">Prepared for Selected Investors</span>
+    </div>
+
+    <div class="anim anim-delay-4" style="display:flex;flex-wrap:wrap;justify-content:center;gap:24px;margin-top:16px;">
+      <div style="text-align:center;">
+        <div style="font-size:clamp(24px,4vw,36px);font-weight:900;color:var(--gold);">$2M</div>
+        <div style="font-size:11px;color:var(--grey-dim);text-transform:uppercase;letter-spacing:1px;">Seed Round</div>
+      </div>
+      <div style="width:1px;background:var(--gold-border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:clamp(24px,4vw,36px);font-weight:900;color:var(--gold);">$120M+</div>
+        <div style="font-size:11px;color:var(--grey-dim);text-transform:uppercase;letter-spacing:1px;">Valuation Target</div>
+      </div>
+      <div style="width:1px;background:var(--gold-border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:clamp(24px,4vw,36px);font-weight:900;color:var(--gold);">18mo</div>
+        <div style="font-size:11px;color:var(--grey-dim);text-transform:uppercase;letter-spacing:1px;">Runway</div>
+      </div>
+    </div>
+
+    <p style="font-size:12px;color:var(--grey-dim);margin-top:32px;">jeff@assuredefi.com &nbsp;·&nbsp; assuredefi.com</p>
   </div>
+  <div class="footer-conf">Confidential — Do not distribute without permission — Assure DeFi LLC — 2026</div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 2: THE PROBLEM -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 2: THE PROBLEM                               -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s2">
+  <div class="slide-glow" style="top:-50px;right:-100px;"></div>
   <div class="slide-inner">
-    <div class="slide-number">01 &mdash; The Problem</div>
-    <h2>Every crypto company has the same $500K problem</h2>
-    <p class="subtitle">Business development in crypto is broken. The market is fragmented, decentralized, pseudonymous, and changing daily. Traditional B2B sales tools were never designed for this world.</p>
+    <div class="slide-label anim">01 — The Problem</div>
+    <h2 class="anim anim-delay-1">Crypto BD is broken.<br>And it's costing the industry billions.</h2>
+    <p class="subtitle anim anim-delay-2">Business development in crypto is structurally broken. The market is fragmented, decentralized, pseudonymous, and changing daily. Traditional B2B sales tools were never designed for this world — and it shows.</p>
 
-    <div class="features-grid">
+    <div class="features-grid anim anim-delay-2">
       <div class="feature-card">
-        <div class="icon">?</div>
-        <h4>Who do you even contact?</h4>
-        <p>300,000+ crypto projects across 200+ chains. No comprehensive directory exists. Projects launch and die daily. Finding the right prospects requires checking Twitter, Discord, Telegram, on-chain data, CoinGecko, CMC, and dozens of niche platforms &mdash; every single day.</p>
+        <div class="feature-icon">?</div>
+        <h4>No directory exists</h4>
+        <p>300,000+ crypto projects across 200+ chains. No LinkedIn. No Salesforce. No comprehensive database. Finding the right prospect means manually checking Twitter, Discord, Telegram, on-chain data, CoinGecko, CMC, and dozens of niche platforms — every single day.</p>
       </div>
       <div class="feature-card">
-        <div class="icon">X</div>
-        <h4>How do you reach them?</h4>
-        <p>Founders are pseudonymous. There's no LinkedIn for crypto. Email doesn't work. The only reliable channel is Twitter/X DMs &mdash; where every project gets 50+ spam DMs daily from bots using spintax templates. Your message gets buried instantly.</p>
+        <div class="feature-icon">✕</div>
+        <h4>The only channel is flooded with spam</h4>
+        <p>Founders are pseudonymous. Email doesn't work. The only reliable channel is Twitter/X DMs — where every project receives 50+ spam DMs daily from bots using spintax templates. Standing out is nearly impossible when you can't even identify who to contact.</p>
       </div>
       <div class="feature-card">
-        <div class="icon">#</div>
-        <h4>AI slop killed cold outreach</h4>
-        <p>Generic LLM-generated DMs are instantly recognizable. "I noticed your innovative project..." is the new "Dear Sir/Madam." Recipients have developed AI-slop radar. The bar for standing out has never been higher.</p>
+        <div class="feature-icon">⚠</div>
+        <h4>AI slop has destroyed cold outreach</h4>
+        <p>Generic LLM-generated DMs are instantly recognizable. "I noticed your innovative project..." is the new "Dear Sir/Madam." Recipients have developed AI-slop radar. The bar for genuine, personalized outreach has never been higher — and most tools make it worse.</p>
       </div>
       <div class="feature-card">
-        <div class="icon">$</div>
-        <h4>BD teams are expensive and slow</h4>
-        <p>A 5-person BD team costs $500K+/year. They manually research 10-20 prospects per day. Most of those prospects are wrong-fit. The ROI is poor because 80% of time is spent on research, not selling.</p>
+        <div class="feature-icon">$</div>
+        <h4>Human BD teams cost $500K+ with poor ROI</h4>
+        <p>A 5-person BD team costs $500K+/year. They manually research 10–20 prospects per day. 80% of their time is spent on research, not selling. Most prospects are wrong-fit. The ROI is structurally broken because the right tools simply don't exist.</p>
       </div>
     </div>
 
-    <div class="quote-block">
-      <p>"We spent 5 years living this problem. We've talked to 1,500+ crypto projects. We tried every tool, every CRM, every VA service. Nothing worked &mdash; because the tools weren't built for crypto."</p>
-      <p class="attribution">&mdash; Jeff Leggett, Founder &amp; CEO, Assure DeFi</p>
+    <div class="quote-block anim anim-delay-3">
+      <p>"We spent 5 years living this problem. We've talked to 1,500+ crypto projects. We tried every tool, every CRM, every VA service. Nothing worked — because the tools weren't built for crypto."</p>
+      <p class="attr">— Jeff Leggett (El Crypto Chapo), Founder &amp; CEO, Assure DeFi</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 3: MARKET SIZE -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 3: MARKET OPPORTUNITY                        -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s3">
+  <div class="slide-glow" style="bottom:-100px;left:-50px;"></div>
   <div class="slide-inner">
-    <div class="slide-number">02 &mdash; Market Opportunity</div>
-    <h2>A massive, underserved market</h2>
-    <p class="subtitle">Crypto business intelligence is a multi-billion dollar opportunity where no dominant player has emerged.</p>
+    <div class="slide-label anim">02 — Market Opportunity</div>
+    <h2 class="anim anim-delay-1">A $14B category with no dominant player — yet.</h2>
+    <p class="subtitle anim anim-delay-2">Crypto business intelligence is a multi-billion dollar opportunity sitting at the intersection of B2B data, AI automation, and the fastest-growing asset class in history. No one has captured it.</p>
 
-    <div class="stats-grid stats-grid-4">
+    <div class="stats-grid stats-grid-4 anim anim-delay-2">
       <div class="stat">
         <div class="stat-value">$67B</div>
-        <div class="stat-label">Global B2B data market (2025)</div>
+        <div class="stat-label">Global B2B data &amp; intelligence market</div>
       </div>
       <div class="stat">
         <div class="stat-value">$14B</div>
-        <div class="stat-label">Crypto analytics TAM</div>
+        <div class="stat-label">Crypto analytics TAM (13% CAGR)</div>
       </div>
       <div class="stat">
         <div class="stat-value">300K+</div>
-        <div class="stat-label">Active crypto projects</div>
+        <div class="stat-label">Active crypto projects needing BD tools</div>
       </div>
-      <div class="stat">
-        <div class="stat-value">12K+</div>
-        <div class="stat-label">Crypto companies needing BD tools</div>
+      <div class="stat stat-gold">
+        <div class="stat-value">$0</div>
+        <div class="stat-label">Revenue captured by a dominant crypto BD platform</div>
       </div>
     </div>
 
-    <div class="two-col" style="margin-top:32px;">
+    <div class="two-col anim anim-delay-3" style="margin-top:24px;">
       <div>
         <h3>Who needs this?</h3>
         <ul class="bullet-list">
-          <li><strong>Audit &amp; security firms</strong> &mdash; finding projects that need audits before launch</li>
-          <li><strong>Market makers</strong> &mdash; identifying new tokens to provide liquidity</li>
-          <li><strong>VCs &amp; investors</strong> &mdash; sourcing deal flow before others</li>
-          <li><strong>Launchpads</strong> &mdash; finding quality projects to host</li>
-          <li><strong>Marketing agencies</strong> &mdash; finding crypto clients at the right stage</li>
-          <li><strong>Infrastructure providers</strong> &mdash; identifying protocols on their chain</li>
-          <li><strong>OTC desks &amp; exchanges</strong> &mdash; token listing intelligence</li>
-          <li><strong>Legal &amp; compliance firms</strong> &mdash; prospecting in web3</li>
+          <li><strong>Audit &amp; security firms</strong> — finding projects before launch</li>
+          <li><strong>Market makers</strong> — identifying new tokens for liquidity</li>
+          <li><strong>VCs &amp; investors</strong> — sourcing deal flow before others</li>
+          <li><strong>Launchpads</strong> — finding quality projects to host</li>
+          <li><strong>Marketing agencies</strong> — finding crypto clients at the right stage</li>
+          <li><strong>Infrastructure providers</strong> — identifying protocols on their chain</li>
+          <li><strong>OTC desks &amp; exchanges</strong> — token listing intelligence</li>
+          <li><strong>Legal &amp; compliance firms</strong> — prospecting in web3</li>
         </ul>
       </div>
       <div>
         <h3>Serviceable market</h3>
-        <div class="card">
+        <div class="card" style="margin-bottom:14px;">
           <table class="data-table">
-            <tr>
-              <td style="color:var(--white);font-weight:600;">TAM</td>
-              <td>$14B &mdash; global crypto analytics</td>
-            </tr>
-            <tr>
-              <td style="color:var(--white);font-weight:600;">SAM</td>
-              <td>$2.4B &mdash; crypto BD + intelligence</td>
-            </tr>
-            <tr>
-              <td style="color:var(--white);font-weight:600;">SOM (Year 2)</td>
-              <td>$50M &mdash; 2,000 customers at avg $2K/mo</td>
-            </tr>
+            <tr><td class="td-white">TAM</td><td class="td-gold">$14B</td><td style="color:var(--grey-dim);font-size:12px;">Global crypto analytics</td></tr>
+            <tr><td class="td-white">SAM</td><td class="td-gold">$2.4B</td><td style="color:var(--grey-dim);font-size:12px;">Crypto BD + intelligence tools</td></tr>
+            <tr><td class="td-white">SOM (Yr 2)</td><td class="td-gold">$50M</td><td style="color:var(--grey-dim);font-size:12px;">2,000 customers × $2K/mo avg</td></tr>
           </table>
         </div>
-        <p style="font-size:13px;margin-top:12px;">Comparable: Chainalysis ($8.6B valuation, compliance analytics). Nansen ($750M, wallet analytics). Messari ($300M+, research). <strong>Zero dominant player in crypto BD intelligence + autonomous outreach.</strong></p>
+        <div class="section-divider"><span>Comparable Valuations</span></div>
+        <ul class="bullet-list" style="margin-top:10px;">
+          <li><strong>Chainalysis:</strong> $2.5B valuation — compliance analytics</li>
+          <li><strong>Nansen:</strong> $88M raised — wallet analytics</li>
+          <li><strong>Messari:</strong> $300M+ — crypto research</li>
+          <li><strong>Arkham:</strong> $150M+ — on-chain intelligence</li>
+        </ul>
+        <div class="callout" style="margin-top:12px;"><strong>Zero dominant player</strong> in crypto BD intelligence + autonomous outreach.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 4: THE SOLUTION -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 4: THE SOLUTION                              -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s4">
+  <div class="slide-glow" style="top:50%;right:-100px;transform:translateY(-50%);"></div>
   <div class="slide-inner">
-    <div class="slide-number">03 &mdash; The Solution</div>
-    <h2>Connect: Your AI business development team</h2>
-    <p class="subtitle">An autonomous AI agent that discovers crypto projects, deeply researches each one, and sends hyper-personalized outreach &mdash; like a senior BD professional who works 24/7 and never sends the same message twice.</p>
+    <div class="slide-label anim">03 — The Solution</div>
+    <h2 class="anim anim-delay-1">Connect: The AI BD team that works 24/7 and never sends the same message twice.</h2>
+    <p class="subtitle anim anim-delay-2">An autonomous AI agent that discovers crypto projects, deeply researches each one, and sends hyper-personalized outreach — like a senior BD professional who works around the clock and knows every prospect personally.</p>
 
-    <div class="features-grid features-grid-3">
-      <div class="feature-card">
-        <div class="icon">1</div>
-        <h4>Discover</h4>
-        <p>Multi-agent AI swarm searches Twitter, CoinMarketCap, DexScreener, and 20+ data sources in parallel. Finds 200-400 qualified prospects per run. Classifies each as Project, Company, or Individual with 95% accuracy.</p>
+    <div class="features-grid features-grid-3 anim anim-delay-2">
+      <div class="feature-card feature-card-gold">
+        <div class="feature-icon" style="font-size:18px;">1</div>
+        <h4 style="color:var(--gold);">Discover</h4>
+        <p>Multi-agent AI swarm searches Twitter/X, CoinMarketCap, DexScreener, and 20+ data sources simultaneously. Finds 200–400 qualified prospects per run. Classifies each as Project, Company, or Individual with <strong>95% accuracy</strong>. Zero manual effort.</p>
       </div>
-      <div class="feature-card">
-        <div class="icon">2</div>
-        <h4>Research</h4>
-        <p>Deep enrichment pipeline builds 130-150 data points per prospect: team members, tech stack, funding status, token metrics, traction signals, risk factors, pain points, and buying signals. All stored permanently.</p>
+      <div class="feature-card feature-card-gold">
+        <div class="feature-icon" style="font-size:18px;">2</div>
+        <h4 style="color:var(--gold);">Research</h4>
+        <p>Deep enrichment pipeline builds <strong>130–150 data points</strong> per prospect: team composition, tech stack, funding status, token metrics, traction signals, risk factors, pain points, and buying signals. Every record stored permanently and growing more valuable over time.</p>
       </div>
-      <div class="feature-card">
-        <div class="icon">3</div>
-        <h4>Engage</h4>
-        <p>Generates custom DM variants for each prospect based on their specific situation &mdash; not templates. Uses real data, real pain points, real angles. Every message reads like it was written by a human who spent 30 minutes researching them.</p>
+      <div class="feature-card feature-card-gold">
+        <div class="feature-icon" style="font-size:18px;">3</div>
+        <h4 style="color:var(--gold);">Engage</h4>
+        <p>Generates <strong>unique DM variants</strong> for each prospect based on their specific situation — not templates. Uses real data, real pain points, real angles. Every message reads like it was written by a human who spent 30 minutes researching them. Because the AI did.</p>
       </div>
     </div>
 
-    <div class="spacer"></div>
-
-    <div class="card card-gold">
-      <h3 style="color:var(--gold);font-size:16px;margin-bottom:16px;">What makes Connect different from "AI outreach tools"</h3>
-      <div class="two-col" style="gap:16px;">
+    <div class="card card-highlight anim anim-delay-3">
+      <h3 style="font-size:15px;color:var(--gold);margin-bottom:16px;">What makes Connect fundamentally different from "AI outreach tools"</h3>
+      <div class="two-col" style="gap:14px;">
         <ul class="bullet-list">
           <li><strong>Not spintax.</strong> Every message is unique, generated from 130+ data points about that specific prospect</li>
-          <li><strong>Not generic AI slop.</strong> Uses your actual business context, case studies, and proof points &mdash; not "innovative project" filler</li>
-          <li><strong>Not just a lead list.</strong> Full pipeline from discovery to sent DM to reply tracking to conversation management</li>
+          <li><strong>Not generic AI slop.</strong> Uses your actual business context, case studies, and proof points — not "innovative project" filler</li>
+          <li><strong>Not just a lead list.</strong> Full pipeline: discovery → research → DM → reply tracking → conversation management</li>
         </ul>
         <ul class="bullet-list">
-          <li><strong>Crypto-native intelligence.</strong> Understands tokens, chains, TVL, audit status, presale stage &mdash; concepts no horizontal tool knows</li>
+          <li><strong>Crypto-native intelligence.</strong> Understands tokens, chains, TVL, audit status, presale stage — concepts no horizontal tool knows</li>
           <li><strong>Reply-first methodology.</strong> First message is 100% about them, zero pitch. Goal: start a conversation, not close a deal</li>
           <li><strong>Agentic, not templated.</strong> 7 specialized AI agents that adapt strategy in real-time based on what they find</li>
         </ul>
@@ -737,68 +934,85 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 5: HOW IT WORKS -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 5: HOW IT WORKS                              -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s5">
   <div class="slide-inner">
-    <div class="slide-number">04 &mdash; How It Works</div>
-    <h2>End-to-end autonomous pipeline</h2>
+    <div class="slide-label anim">04 — How It Works</div>
+    <h2 class="anim anim-delay-1">End-to-end autonomous pipeline.<br><span class="gold">$0.87 per run. 150 DM-ready leads.</span></h2>
 
-    <div style="margin:32px 0;">
-      <div class="funnel" style="width:100%;">
-        <div class="funnel-step" style="width:100%;"><span class="label">Raw Twitter + Multi-Source Search</span><span class="value">~2,000 candidates</span></div>
-        <div class="funnel-arrow">|</div>
-        <div class="funnel-step" style="width:90%;"><span class="label">Entity Classification (AI-powered, 95% accuracy)</span><span class="value">~1,200</span></div>
-        <div class="funnel-arrow">|</div>
-        <div class="funnel-step" style="width:75%;"><span class="label">Intent Matching + Activity Gate + Quality Filters</span><span class="value">~400</span></div>
-        <div class="funnel-arrow">|</div>
-        <div class="funnel-step" style="width:55%;"><span class="label">Deep Enrichment (130+ data points per lead)</span><span class="value">~300</span></div>
-        <div class="funnel-arrow">|</div>
-        <div class="funnel-step" style="width:40%;"><span class="label">AI Scoring &amp; Tiering (S/A/B/C/D)</span><span class="value">~200</span></div>
-        <div class="funnel-arrow">|</div>
-        <div class="funnel-step highlight" style="width:30%;"><span class="label">Personalized DMs Sent</span><span class="value">~150 DM-ready</span></div>
+    <div class="two-col anim anim-delay-2" style="margin-top:24px;gap:32px;">
+      <div>
+        <div class="funnel">
+          <div class="funnel-step" style="width:100%;"><span class="f-label">Raw Twitter + Multi-Source Search</span><span class="f-val">~2,000</span></div>
+          <div class="funnel-arrow">▼</div>
+          <div class="funnel-step" style="width:92%;"><span class="f-label">Entity Classification (AI, 95% accuracy)</span><span class="f-val">~1,200</span></div>
+          <div class="funnel-arrow">▼</div>
+          <div class="funnel-step" style="width:78%;"><span class="f-label">Intent Matching + Activity Gate + Filters</span><span class="f-val">~400</span></div>
+          <div class="funnel-arrow">▼</div>
+          <div class="funnel-step" style="width:58%;"><span class="f-label">Deep Enrichment (130+ data points)</span><span class="f-val">~300</span></div>
+          <div class="funnel-arrow">▼</div>
+          <div class="funnel-step" style="width:42%;"><span class="f-label">AI Scoring &amp; Tiering (S/A/B/C/D)</span><span class="f-val">~200</span></div>
+          <div class="funnel-arrow">▼</div>
+          <div class="funnel-step f-highlight" style="width:30%;"><span class="f-label">✦ Personalized DMs Sent</span><span class="f-val">~150</span></div>
+        </div>
       </div>
-    </div>
-
-    <div class="stats-grid stats-grid-4">
-      <div class="stat">
-        <div class="stat-value">$0.87</div>
-        <div class="stat-label">Cost per discovery run</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">$0.22</div>
-        <div class="stat-label">Cost per DM-ready lead</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">8-15</div>
-        <div class="stat-label">Leads enriched / minute</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">95%</div>
-        <div class="stat-label">Classification accuracy</div>
+      <div>
+        <div class="stats-grid stats-grid-3" style="grid-template-columns:1fr 1fr;gap:12px;margin:0 0 16px;">
+          <div class="stat">
+            <div class="stat-value" style="font-size:32px;">$0.87</div>
+            <div class="stat-label">Cost per full discovery run</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" style="font-size:32px;">$0.005</div>
+            <div class="stat-label">Cost per qualified enriched lead</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" style="font-size:32px;">8–15</div>
+            <div class="stat-label">Leads enriched per minute</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" style="font-size:32px;">95%</div>
+            <div class="stat-label">Entity classification accuracy</div>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>17,000x cost advantage.</strong> A human BD team researching 10 leads/day costs ~$150/day in labor. Connect processes 300 enriched leads for $0.87. That's not an incremental improvement — it's a category shift.
+        </div>
+        <div class="card" style="margin-top:12px;">
+          <h4 style="color:var(--gold);font-size:13px;margin-bottom:10px;">5 ACTIVE PLAYBOOKS</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span class="tag">Security Audits</span>
+            <span class="tag">Trust Marketing</span>
+            <span class="tag">Early-Stage</span>
+            <span class="tag">Partnerships</span>
+            <span class="tag">Kill Switch Podcast</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 6: TRACTION -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 6: TRACTION                                  -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s6">
+  <div class="slide-glow" style="top:-50px;left:-50px;"></div>
   <div class="slide-inner">
-    <div class="slide-number">05 &mdash; Traction</div>
-    <h2>Already built. Already running.</h2>
-    <p class="subtitle">This isn't a concept deck. Connect is a production system that has been processing leads and generating revenue for Assure DeFi since Q1 2026.</p>
+    <div class="slide-label anim">05 — Traction</div>
+    <h2 class="anim anim-delay-1">Already built. Already running.<br><span class="gold">Already generating revenue.</span></h2>
+    <p class="subtitle anim anim-delay-2">This isn't a concept deck. Connect is a production system that has been processing leads and generating revenue for Assure DeFi since Q1 2026. The hard part — making it work — is done.</p>
 
-    <div class="stats-grid stats-grid-4">
-      <div class="stat">
-        <div class="stat-value">17.5K+</div>
-        <div class="stat-label">Crypto entities in database</div>
+    <div class="stats-grid stats-grid-4 anim anim-delay-2">
+      <div class="stat stat-gold">
+        <div class="stat-value">17,596</div>
+        <div class="stat-label">Crypto entities in live database</div>
       </div>
       <div class="stat">
         <div class="stat-value">10K+</div>
-        <div class="stat-label">Symbols tracked</div>
+        <div class="stat-label">Token symbols tracked</div>
       </div>
       <div class="stat">
         <div class="stat-value">150</div>
@@ -806,33 +1020,33 @@
       </div>
       <div class="stat">
         <div class="stat-value">4</div>
-        <div class="stat-label">Production services on Railway</div>
+        <div class="stat-label">Production microservices live</div>
       </div>
     </div>
 
-    <div class="two-col" style="margin-top:24px;">
+    <div class="two-col anim anim-delay-3" style="margin-top:20px;">
       <div>
         <h3>What's live in production</h3>
-        <ul class="bullet-list">
-          <li><strong>Discovery engine</strong> &mdash; 7-agent AI swarm with 4 active data source adapters and 20+ in registry</li>
-          <li><strong>Enrichment worker</strong> &mdash; Grok LLM pipeline processing 160-270 leads/hour</li>
-          <li><strong>Outreach bot</strong> &mdash; Multi-step DM sequences via InboxApp + X API with reply tracking</li>
-          <li><strong>Admin dashboard</strong> &mdash; Full Next.js app with real-time progress, analytics, cost tracking, and conversation management</li>
-          <li><strong>5 playbooks</strong> &mdash; Security, trust marketing, early-stage, partnerships, Kill Switch podcast</li>
-          <li><strong>Candidate pool</strong> &mdash; Compounding asset: repeat runs get +230% more leads at zero incremental cost</li>
+        <ul class="bullet-list" style="margin-top:10px;">
+          <li><strong>Discovery engine</strong> — 7-agent AI swarm, 4 active data source adapters, 20+ in registry</li>
+          <li><strong>Enrichment worker</strong> — Grok LLM pipeline processing 160–270 leads/hour</li>
+          <li><strong>Outreach bot</strong> — Multi-step DM sequences via InboxApp + X API with reply tracking</li>
+          <li><strong>Admin dashboard</strong> — Full Next.js app with real-time progress, analytics, cost tracking, conversation management</li>
+          <li><strong>5 active playbooks</strong> — Security, trust marketing, early-stage, partnerships, Kill Switch podcast</li>
+          <li><strong>Candidate pool</strong> — Compounding asset: repeat runs deliver <strong>+230% more leads</strong> at zero incremental cost</li>
         </ul>
       </div>
       <div>
         <h3>Production metrics</h3>
-        <div class="card">
-          <table class="data-table" style="margin:0;">
-            <tr><td style="color:var(--white);">Discovery run cost</td><td style="color:var(--gold);">$0.87-1.50</td></tr>
-            <tr><td style="color:var(--white);">Cost per qualified lead</td><td style="color:var(--gold);">$0.005</td></tr>
-            <tr><td style="color:var(--white);">DM quality score</td><td style="color:var(--gold);">96%</td></tr>
-            <tr><td style="color:var(--white);">Entity classification accuracy</td><td style="color:var(--gold);">95%</td></tr>
-            <tr><td style="color:var(--white);">System reliability score</td><td style="color:var(--gold);">82.1%</td></tr>
-            <tr><td style="color:var(--white);">S/A tier rate (mining)</td><td style="color:var(--gold);">76%</td></tr>
-            <tr><td style="color:var(--white);">Monthly infra cost</td><td style="color:var(--gold);">~$600</td></tr>
+        <div class="card" style="margin-top:10px;">
+          <table class="data-table">
+            <tr><td class="td-white">Discovery run cost</td><td class="td-gold">$0.87–1.50</td></tr>
+            <tr><td class="td-white">Cost per qualified lead</td><td class="td-gold">$0.005</td></tr>
+            <tr><td class="td-white">DM quality score</td><td class="td-gold">96%</td></tr>
+            <tr><td class="td-white">Entity classification accuracy</td><td class="td-gold">95%</td></tr>
+            <tr><td class="td-white">System reliability</td><td class="td-gold">82.1% <span style="color:var(--green);font-size:11px;">↑ improving</span></td></tr>
+            <tr><td class="td-white">S/A tier rate (mining)</td><td class="td-gold">76%</td></tr>
+            <tr><td class="td-white">Monthly infrastructure cost</td><td class="td-gold">~$600</td></tr>
           </table>
         </div>
       </div>
@@ -840,162 +1054,149 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 7: CRYPTO_ACCOUNTS - THE REAL PRODUCT -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 7: THE DATA ASSET                            -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s7">
+  <div class="slide-glow" style="bottom:-50px;right:-50px;"></div>
   <div class="slide-inner">
-    <div class="slide-number">06 &mdash; The Data Asset</div>
-    <h2>The universal crypto ecosystem database</h2>
-    <p class="subtitle">Every discovery run builds a permanent, growing database of enriched crypto entities. This compounding data asset is the long-term product &mdash; and it gets more valuable every day.</p>
+    <div class="slide-label anim">06 — The Data Asset</div>
+    <h2 class="anim anim-delay-1">The database is the product.<br><span class="gold">And it compounds every single day.</span></h2>
+    <p class="subtitle anim anim-delay-2">Every discovery run permanently enriches a growing database of crypto entities. This isn't just a pipeline — it's an infrastructure asset that becomes more valuable and more defensible with every run, every customer, every query.</p>
 
-    <div class="card card-gold">
-      <div class="two-col" style="gap:24px;">
+    <div class="card card-highlight anim anim-delay-2">
+      <div class="two-col" style="gap:32px;">
         <div>
-          <h3 style="color:var(--gold);font-size:14px;">TODAY (3-4% coverage)</h3>
-          <div class="stat-value" style="font-size:36px;margin:8px 0;">17,596</div>
-          <p style="font-size:14px;margin:0;">Active entities with 130-150 data fields each</p>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:8px;">TODAY — 3–4% Coverage</div>
+          <div style="font-size:48px;font-weight:900;color:var(--gold);line-height:1;letter-spacing:-2px;margin-bottom:6px;">17,596</div>
+          <p style="font-size:13px;margin:0;color:var(--grey);">Active entities · 130–150 data fields each</p>
           <div class="progress-bar" style="margin-top:12px;"><div class="progress-fill" style="width:4%;"></div></div>
-          <p style="font-size:12px;color:var(--grey-dim);margin:4px 0 0;">4% of estimated crypto ecosystem</p>
+          <p style="font-size:11px;color:var(--grey-dim);margin:4px 0 0;">4% of estimated crypto ecosystem</p>
         </div>
         <div>
-          <h3 style="color:var(--gold);font-size:14px;">TARGET (18 months)</h3>
-          <div class="stat-value" style="font-size:36px;margin:8px 0;">350,000</div>
-          <p style="font-size:14px;margin:0;">Comprehensive global coverage</p>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:8px;">TARGET — 18 Months</div>
+          <div style="font-size:48px;font-weight:900;color:var(--gold);line-height:1;letter-spacing:-2px;margin-bottom:6px;">350,000</div>
+          <p style="font-size:13px;margin:0;color:var(--grey);">Comprehensive global coverage</p>
           <div class="progress-bar" style="margin-top:12px;"><div class="progress-fill" style="width:100%;"></div></div>
-          <p style="font-size:12px;color:var(--grey-dim);margin:4px 0 0;">80%+ data completeness per entity</p>
+          <p style="font-size:11px;color:var(--grey-dim);margin:4px 0 0;">80%+ data completeness per entity</p>
         </div>
       </div>
     </div>
 
-    <h3 style="margin-top:24px;">What we know about every entity</h3>
-    <div class="features-grid features-grid-3" style="margin-top:12px;">
+    <h3 class="anim anim-delay-3" style="margin-top:20px;margin-bottom:12px;">What we know about every entity</h3>
+    <div class="features-grid features-grid-3 anim anim-delay-3">
       <div class="feature-card">
-        <h4 style="color:var(--gold);font-size:13px;">IDENTITY</h4>
+        <h4 style="color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:1px;">Identity</h4>
         <p>Handle, display name, bio, website, entity type, project stage, category, chains, team members</p>
       </div>
       <div class="feature-card">
-        <h4 style="color:var(--gold);font-size:13px;">SOCIAL</h4>
+        <h4 style="color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:1px;">Social</h4>
         <p>Followers, engagement rate, verification status, activity recency, Telegram, Discord, community size</p>
       </div>
       <div class="feature-card">
-        <h4 style="color:var(--gold);font-size:13px;">MARKET</h4>
+        <h4 style="color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:1px;">Market</h4>
         <p>Token symbol, contract address, market cap, volume, TVL, CEX listings, DEX liquidity, price history</p>
       </div>
       <div class="feature-card">
-        <h4 style="color:var(--gold);font-size:13px;">LLM INTELLIGENCE</h4>
+        <h4 style="color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:1px;">LLM Intelligence</h4>
         <p>AI-generated account summary, pain points, buying signals, tech stack analysis, risk assessment, outreach angles</p>
       </div>
       <div class="feature-card">
-        <h4 style="color:var(--gold);font-size:13px;">SALES READINESS</h4>
+        <h4 style="color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:1px;">Sales Readiness</h4>
         <p>Entity score, intent score, lead tier, DM variants, quality gate results, playbook fit assessment</p>
       </div>
-      <div class="feature-card">
-        <h4 style="color:var(--gold);font-size:13px;">COMING SOON</h4>
-        <p>On-chain metrics, holder distribution, smart money signals, funding rounds, GitHub activity, bridge monitoring</p>
+      <div class="feature-card" style="border-style:dashed;">
+        <h4 style="color:var(--grey-dim);font-size:12px;text-transform:uppercase;letter-spacing:1px;">Coming Soon</h4>
+        <p style="color:var(--grey-dim);">On-chain metrics, holder distribution, smart money signals, funding rounds, GitHub activity, bridge monitoring</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 8: BUSINESS MODEL -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 8: BUSINESS MODEL                            -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s8">
+  <div class="slide-glow" style="top:50%;left:-100px;transform:translateY(-50%);"></div>
   <div class="slide-inner">
-    <div class="slide-number">07 &mdash; Business Model</div>
-    <h2>Three revenue engines</h2>
-    <p class="subtitle">Connect monetizes through platform subscriptions, API access, and the existing Assure DeFi services pipeline it supercharges.</p>
+    <div class="slide-label anim">07 — Business Model</div>
+    <h2 class="anim anim-delay-1">Three revenue engines.<br><span class="gold">85%+ gross margins. Compounding unit economics.</span></h2>
 
-    <div class="features-grid features-grid-3">
-      <div class="feature-card" style="border-color:var(--gold);">
-        <h4 style="color:var(--gold);">1. Connect Platform (SaaS)</h4>
+    <div class="features-grid features-grid-3 anim anim-delay-2">
+      <div class="feature-card feature-card-gold">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+          <h4 style="color:var(--gold);margin:0;">1. Connect Platform</h4>
+          <span class="tag-solid" style="font-size:11px;padding:3px 8px;">SaaS</span>
+        </div>
         <p>Multi-tenant BD automation. Customers configure playbooks, run discovery queries, and let AI handle outreach. Priced per seat + usage.</p>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--gold-border);">
-          <p style="font-size:13px;color:var(--gold);margin:0;"><strong>$499-2,999/mo per customer</strong></p>
-          <p style="font-size:12px;margin:4px 0 0;">Target: 200 customers Year 1</p>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--gold-border);">
+          <div style="font-size:18px;font-weight:900;color:var(--gold);">$499–2,999<span style="font-size:13px;font-weight:400;">/mo</span></div>
+          <div style="font-size:12px;color:var(--grey-dim);margin-top:2px;">Target: 200 customers Year 1</div>
         </div>
       </div>
-      <div class="feature-card" style="border-color:var(--gold);">
-        <h4 style="color:var(--gold);">2. CryptoDB API</h4>
+      <div class="feature-card feature-card-gold">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+          <h4 style="color:var(--gold);margin:0;">2. CryptoDB API</h4>
+          <span class="tag-solid" style="font-size:11px;padding:3px 8px;">API</span>
+        </div>
         <p>REST API exposing the crypto_accounts database. Search, filter, webhook alerts, bulk export. The "Bloomberg Terminal for crypto entities."</p>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--gold-border);">
-          <p style="font-size:13px;color:var(--gold);margin:0;"><strong>$29-499/mo per API key</strong></p>
-          <p style="font-size:12px;margin:4px 0 0;">Break-even: 11 customers</p>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--gold-border);">
+          <div style="font-size:18px;font-weight:900;color:var(--gold);">$29–499<span style="font-size:13px;font-weight:400;">/mo</span></div>
+          <div style="font-size:12px;color:var(--grey-dim);margin-top:2px;">Break-even: just 11 customers</div>
         </div>
       </div>
-      <div class="feature-card" style="border-color:var(--gold);">
-        <h4 style="color:var(--gold);">3. Assure DeFi Revenue Lift</h4>
-        <p>Connect already powers Assure DeFi's BD pipeline. More qualified leads = more KYC verifications, audits, and A-Z packages sold. Direct revenue multiplier.</p>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--gold-border);">
-          <p style="font-size:13px;color:var(--gold);margin:0;"><strong>10-30% revenue uplift</strong></p>
-          <p style="font-size:12px;margin:4px 0 0;">From automated pipeline vs manual BD</p>
+      <div class="feature-card feature-card-gold">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+          <h4 style="color:var(--gold);margin:0;">3. Assure DeFi Lift</h4>
+          <span class="tag-solid" style="font-size:11px;padding:3px 8px;">Multiplier</span>
+        </div>
+        <p>Connect already powers Assure DeFi's BD pipeline. More qualified leads = more KYC verifications, audits, and A-Z packages sold.</p>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--gold-border);">
+          <div style="font-size:18px;font-weight:900;color:var(--gold);">10–30%<span style="font-size:13px;font-weight:400;"> revenue uplift</span></div>
+          <div style="font-size:12px;color:var(--grey-dim);margin-top:2px;">On an already profitable business</div>
         </div>
       </div>
     </div>
 
-    <div class="card" style="margin-top:24px;">
-      <h3 style="font-size:14px;">Unit Economics at Scale</h3>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Metric</th>
-            <th>Year 1</th>
-            <th>Year 2</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="color:var(--white);">Platform customers</td>
-            <td>50-100</td>
-            <td>500-1,000</td>
-          </tr>
-          <tr>
-            <td style="color:var(--white);">API customers</td>
-            <td>100-200</td>
-            <td>1,000-2,000</td>
-          </tr>
-          <tr>
-            <td style="color:var(--white);">Avg revenue per customer</td>
-            <td>$800/mo</td>
-            <td>$1,200/mo</td>
-          </tr>
-          <tr>
-            <td style="color:var(--white);">Infrastructure cost</td>
-            <td>$2K-5K/mo</td>
-            <td>$5K-10K/mo</td>
-          </tr>
-          <tr>
-            <td style="color:var(--white);font-weight:600;">Gross margin</td>
-            <td style="color:var(--gold);font-weight:600;">85%+</td>
-            <td style="color:var(--gold);font-weight:600;">90%+</td>
-          </tr>
-          <tr>
-            <td style="color:var(--white);font-weight:600;">ARR target</td>
-            <td style="color:var(--gold);font-weight:600;">$1.2-2.4M</td>
-            <td style="color:var(--gold);font-weight:600;">$7.2-14.4M</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="card anim anim-delay-3" style="margin-top:20px;">
+      <h4 style="color:var(--gold);font-size:13px;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px;">Unit Economics at Scale</h4>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Metric</th><th>Year 1</th><th>Year 2</th></tr></thead>
+          <tbody>
+            <tr><td class="td-white">Platform customers</td><td>50–100</td><td>500–1,000</td></tr>
+            <tr><td class="td-white">API customers</td><td>100–200</td><td>1,000–2,000</td></tr>
+            <tr><td class="td-white">Avg revenue per customer</td><td>$800/mo</td><td>$1,200/mo</td></tr>
+            <tr><td class="td-white">Infrastructure cost</td><td>$2K–5K/mo</td><td>$5K–10K/mo</td></tr>
+            <tr class="highlight-row"><td>Gross margin</td><td>85%+</td><td>90%+</td></tr>
+            <tr class="highlight-row"><td>ARR target</td><td>$1.2–2.4M</td><td>$7.2–14.4M</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout anim anim-delay-4">
+      <strong>Why margins are exceptional:</strong> Near-zero COGS ($4K/mo runs 500K entities) · Compounding data asset drives per-lead cost toward zero · LLM costs drop 50–80% annually — unit economics improve automatically
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 9: COMPETITIVE LANDSCAPE -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 9: COMPETITIVE MOAT                          -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s9">
+  <div class="slide-glow" style="top:-50px;right:-50px;"></div>
   <div class="slide-inner">
-    <div class="slide-number">08 &mdash; Competition &amp; Moat</div>
-    <h2>No one else does what we do</h2>
-    <p class="subtitle">Existing players address fragments of the problem. Connect is the first platform that combines crypto-native intelligence, autonomous discovery, and agentic outreach in one system.</p>
+    <div class="slide-label anim">08 — Competition &amp; Moat</div>
+    <h2 class="anim anim-delay-1">No one else does what we do.<br><span class="gold">Here's why that won't change easily.</span></h2>
+    <p class="subtitle anim anim-delay-2">Existing players address fragments of the problem. Connect is the first platform combining crypto-native intelligence, autonomous discovery, and agentic outreach in a single production system.</p>
 
-    <div class="card" style="overflow-x:auto;">
+    <div class="card anim anim-delay-2" style="overflow-x:auto;">
       <table class="data-table">
         <thead>
           <tr>
             <th>Capability</th>
-            <th style="text-align:center;">Connect</th>
+            <th style="text-align:center;color:var(--gold);">Connect</th>
             <th style="text-align:center;">Messari</th>
             <th style="text-align:center;">Nansen</th>
             <th style="text-align:center;">Apollo/Clay</th>
@@ -1003,274 +1204,259 @@
         </thead>
         <tbody>
           <tr>
-            <td style="color:var(--white);">Crypto entity database</td>
-            <td style="text-align:center;color:var(--gold);font-weight:700;">350K target</td>
-            <td style="text-align:center;">~5K deep</td>
-            <td style="text-align:center;">Wallets only</td>
-            <td style="text-align:center;">None</td>
+            <td class="td-white">Crypto entity database</td>
+            <td style="text-align:center;" class="td-gold">350K target</td>
+            <td style="text-align:center;" class="comp-no">~5K deep</td>
+            <td style="text-align:center;" class="comp-no">Wallets only</td>
+            <td style="text-align:center;" class="comp-no">None</td>
           </tr>
           <tr>
-            <td style="color:var(--white);">Autonomous discovery</td>
-            <td style="text-align:center;color:var(--gold);font-weight:700;">7-agent swarm</td>
-            <td style="text-align:center;">Manual</td>
-            <td style="text-align:center;">No</td>
-            <td style="text-align:center;">Generic scraping</td>
+            <td class="td-white">Autonomous discovery</td>
+            <td style="text-align:center;" class="td-gold">7-agent swarm</td>
+            <td style="text-align:center;" class="comp-no">Manual</td>
+            <td style="text-align:center;" class="comp-no">No</td>
+            <td style="text-align:center;" class="comp-no">Generic scraping</td>
           </tr>
           <tr>
-            <td style="color:var(--white);">AI-powered enrichment</td>
-            <td style="text-align:center;color:var(--gold);font-weight:700;">150 fields</td>
-            <td style="text-align:center;">50-80 fields</td>
-            <td style="text-align:center;">On-chain only</td>
-            <td style="text-align:center;">Generic data</td>
+            <td class="td-white">AI-powered enrichment</td>
+            <td style="text-align:center;" class="td-gold">150 fields</td>
+            <td style="text-align:center;" class="comp-no">50–80 fields</td>
+            <td style="text-align:center;" class="comp-no">On-chain only</td>
+            <td style="text-align:center;" class="comp-no">Generic data</td>
           </tr>
           <tr>
-            <td style="color:var(--white);">Personalized outreach</td>
-            <td style="text-align:center;color:var(--gold);font-weight:700;">AI DMs from data</td>
-            <td style="text-align:center;">No</td>
-            <td style="text-align:center;">No</td>
-            <td style="text-align:center;">Templates</td>
+            <td class="td-white">Personalized outreach</td>
+            <td style="text-align:center;" class="td-gold">AI DMs from data</td>
+            <td style="text-align:center;" class="comp-no">No</td>
+            <td style="text-align:center;" class="comp-no">No</td>
+            <td style="text-align:center;" class="comp-no">Templates only</td>
           </tr>
           <tr>
-            <td style="color:var(--white);">Crypto-native classification</td>
-            <td style="text-align:center;color:var(--gold);font-weight:700;">95% accuracy</td>
-            <td style="text-align:center;">Manual taxonomy</td>
-            <td style="text-align:center;">N/A</td>
-            <td style="text-align:center;">None</td>
+            <td class="td-white">Crypto-native classification</td>
+            <td style="text-align:center;" class="td-gold">95% accuracy</td>
+            <td style="text-align:center;" class="comp-no">Manual taxonomy</td>
+            <td style="text-align:center;" class="comp-no">N/A</td>
+            <td style="text-align:center;" class="comp-no">None</td>
           </tr>
           <tr>
-            <td style="color:var(--white);">Price point</td>
-            <td style="text-align:center;color:var(--gold);font-weight:700;">$499-2,999/mo</td>
+            <td class="td-white">Price point</td>
+            <td style="text-align:center;" class="td-gold">$499–2,999/mo</td>
             <td style="text-align:center;">$25K/year</td>
-            <td style="text-align:center;">$150-2.5K/mo</td>
-            <td style="text-align:center;">$50-500/mo</td>
+            <td style="text-align:center;">$150–2.5K/mo</td>
+            <td style="text-align:center;">$50–500/mo</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <h3 style="margin-top:32px;">The Moat: Compounding advantages</h3>
-    <div class="features-grid" style="margin-top:12px;">
-      <div class="feature-card">
+    <div class="moat-grid anim anim-delay-3">
+      <div class="moat-card">
         <h4>Data Network Effect</h4>
-        <p>Every discovery run makes the database more valuable. The candidate pool means repeat runs are +230% more productive at zero incremental cost. More customers = more queries = faster coverage = more value for everyone.</p>
+        <p>Every discovery run makes the database more valuable. More customers = more queries = faster coverage = more value for everyone. The candidate pool means repeat runs are <strong>+230% more productive</strong> at zero incremental cost.</p>
       </div>
-      <div class="feature-card">
+      <div class="moat-card">
         <h4>Classification IP</h4>
-        <p>95% entity classification accuracy after 6 production iteration rounds. Hundreds of crypto-specific heuristics for cashtag ownership, individual detection, product bio analysis. Months of tuning that can't be replicated overnight.</p>
+        <p>95% accuracy entity classification trained on 17,500+ crypto-specific examples. Understands the difference between a DeFi protocol, a CEX, an NFT project, and a KOL. No horizontal tool has this — and it takes years to build.</p>
       </div>
-      <div class="feature-card">
+      <div class="moat-card">
         <h4>Assure DeFi Network</h4>
-        <p>1,500+ verified project relationships. Direct partnerships with launchpads, VCs, and exchanges. FBI/SEC collaboration history. A 5-year brand moat in crypto trust that no startup can buy.</p>
+        <p>1,500+ verified project relationships. Direct partnerships with launchpads, VCs, and exchanges. FBI/SEC collaboration history. A <strong>5-year brand moat</strong> in crypto trust that no startup can buy or replicate quickly.</p>
       </div>
-      <div class="feature-card">
+      <div class="moat-card">
         <h4>Production-Hardened System</h4>
-        <p>Not a prototype. Hundreds of learned patterns, edge cases handled, pipeline optimizations. Cost economics proven in production. The system has already survived the hard problems that kill v1 products.</p>
+        <p>Not a prototype. 300+ learned patterns, edge cases handled, pipeline optimizations proven in production. The system has already survived the hard problems that kill v1 products — and is running live today.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 10: WHY ASSURE DEFI -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 10: WHY US                                   -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s10">
+  <div class="slide-glow" style="bottom:-50px;left:-50px;"></div>
   <div class="slide-inner">
-    <div class="slide-number">09 &mdash; Why Us</div>
-    <h2>5 years of crypto trust. 1,500+ projects. One unfair advantage.</h2>
-    <p class="subtitle">Connect wasn't built in a lab. It was born from 5 years of frustration doing BD in crypto the hard way &mdash; and the unique position Assure DeFi holds in the ecosystem.</p>
+    <div class="slide-label anim">09 — Why Us</div>
+    <h2 class="anim anim-delay-1">5 years of crypto trust. 1,500+ projects.<br><span class="gold">One unfair advantage.</span></h2>
+    <p class="subtitle anim anim-delay-2">Connect wasn't built in a lab. It was born from 5 years of frustration doing BD in crypto the hard way — and the unique position Assure DeFi has earned in the ecosystem since 2021.</p>
 
-    <div class="two-col">
+    <div class="two-col anim anim-delay-2">
       <div>
-        <h3>The Assure DeFi Foundation</h3>
-        <ul class="bullet-list">
-          <li><strong>Founded 2021</strong> &mdash; First-ever project KYC provider in crypto. Pioneered the category.</li>
-          <li><strong>1,500+ projects verified</strong> &mdash; We've talked to, evaluated, and worked with more crypto projects than almost any company alive</li>
-          <li><strong>$2B+ combined market cap</strong> across verified projects</li>
-          <li><strong>$25B investor network</strong> accessible through the Assure ecosystem</li>
-          <li><strong>FBI, SEC, IRS CI partnerships</strong> &mdash; Real law enforcement collaboration for the criminal accountability guarantee</li>
+        <div class="section-divider"><span>The Foundation</span></div>
+        <div class="stats-grid" style="grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;">
+          <div class="stat" style="padding:14px 12px;">
+            <div class="stat-value" style="font-size:22px;">2021</div>
+            <div class="stat-label">Founded — First-ever crypto project KYC provider</div>
+          </div>
+          <div class="stat" style="padding:14px 12px;">
+            <div class="stat-value" style="font-size:22px;">1,500+</div>
+            <div class="stat-label">Projects verified — more than almost any company alive</div>
+          </div>
+          <div class="stat" style="padding:14px 12px;">
+            <div class="stat-value" style="font-size:22px;">$2B+</div>
+            <div class="stat-label">Combined market cap across verified projects</div>
+          </div>
+          <div class="stat" style="padding:14px 12px;">
+            <div class="stat-value" style="font-size:22px;">$25B</div>
+            <div class="stat-label">Investor network accessible through Assure ecosystem</div>
+          </div>
+        </div>
+        <ul class="bullet-list" style="margin-top:10px;">
+          <li><strong>FBI, SEC, IRS CI partnerships</strong> — Real law enforcement collaboration for criminal accountability</li>
           <li><strong>89% client approval rate</strong> across 990+ analyzed projects</li>
-          <li><strong>Bootstrapped &amp; profitable</strong> &mdash; Zero external funding to date. Real revenue. Real customers.</li>
+          <li><strong>Bootstrapped &amp; profitable</strong> — Zero external funding. Real revenue. Real customers.</li>
         </ul>
       </div>
       <div>
-        <h3>Proven client outcomes</h3>
-        <div class="card" style="margin-bottom:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">
-            <span style="color:var(--white);font-weight:600;">Destra Network</span>
-            <span class="tag-solid" style="font-size:11px;">4,000x</span>
+        <div class="section-divider"><span>Proven Client Outcomes</span></div>
+        <div class="case-grid" style="grid-template-columns:1fr;gap:10px;margin-top:14px;">
+          <div class="case-card" style="display:flex;align-items:center;gap:16px;text-align:left;">
+            <div style="flex-shrink:0;">
+              <div class="case-result">4,000x</div>
+            </div>
+            <div>
+              <div class="case-name">Destra Network</div>
+              <div class="case-desc">$100K → $450M market cap in 21 days with KYC + Audit + Strategic Advisory</div>
+            </div>
           </div>
-          <p style="font-size:13px;margin:0;">$100K to $450M market cap in 21 days with KYC + Audit + Strategic Advisory</p>
-        </div>
-        <div class="card" style="margin-bottom:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">
-            <span style="color:var(--white);font-weight:600;">Gradient</span>
-            <span class="tag-solid" style="font-size:11px;">500x</span>
+          <div class="case-card" style="display:flex;align-items:center;gap:16px;text-align:left;">
+            <div style="flex-shrink:0;">
+              <div class="case-result">500x</div>
+            </div>
+            <div>
+              <div class="case-name">Gradient</div>
+              <div class="case-desc">$50K → $25M. Advanced+ audit caught 11 high-severity issues before launch</div>
+            </div>
           </div>
-          <p style="font-size:13px;margin:0;">$50K to $25M. Advanced+ audit caught 11 high-severity issues before launch</p>
-        </div>
-        <div class="card" style="margin-bottom:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">
-            <span style="color:var(--white);font-weight:600;">FX1 Sports</span>
-            <span class="tag-solid" style="font-size:11px;">500x</span>
+          <div class="case-card" style="display:flex;align-items:center;gap:16px;text-align:left;">
+            <div style="flex-shrink:0;">
+              <div class="case-result">500x</div>
+            </div>
+            <div>
+              <div class="case-name">FX1 Sports</div>
+              <div class="case-desc">$100K → $50M. Full A-Z lifecycle support across the entire project journey</div>
+            </div>
           </div>
-          <p style="font-size:13px;margin:0;">$100K to $50M. Full A-Z lifecycle support</p>
         </div>
-
-        <div class="quote-block" style="margin-top:16px;">
-          <p style="font-size:14px;">"We didn't set out to build a SaaS product. We set out to solve our own pain. After 5 years of manual BD, we built the tool we always needed. Now we're making it available to everyone."</p>
+        <div class="quote-block" style="margin-top:14px;">
+          <p>"We didn't set out to build a SaaS product. We set out to solve our own pain. After 5 years of manual BD, we built the tool we always needed. Now we're making it available to everyone."</p>
+          <p class="attr">— Jeff Leggett (El Crypto Chapo), Founder &amp; CEO</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 11: ROADMAP -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 11: ROADMAP                                  -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s11">
+  <div class="slide-glow" style="top:50%;right:-100px;transform:translateY(-50%);"></div>
   <div class="slide-inner">
-    <div class="slide-number">10 &mdash; Roadmap</div>
-    <h2>From internal tool to category-defining platform</h2>
-    <p class="subtitle">The system is live and generating results. The roadmap scales coverage, opens multi-tenant access, launches the API product, and adds on-chain intelligence.</p>
+    <div class="slide-label anim">10 — Roadmap</div>
+    <h2 class="anim anim-delay-1">The hard part is done.<br><span class="gold">The roadmap scales what's already working.</span></h2>
 
-    <div class="timeline">
+    <div class="timeline anim anim-delay-2">
       <div class="timeline-item done">
-        <div class="timeline-label">Completed &mdash; Q1 2026</div>
-        <div class="timeline-title">Phase 0-1: Production System + 17.5K Entities</div>
-        <div class="timeline-desc">Full autonomous pipeline live. Discovery engine, enrichment worker, outreach bot, admin dashboard. 7-agent AI swarm. 5 playbooks. 17,596 active crypto entities. Production-hardened with 300+ learned patterns.</div>
+        <div class="tl-label">✓ Completed — Q1 2026</div>
+        <div class="tl-title">Phase 0–1: Production System + 17.5K Entities</div>
+        <div class="tl-desc">Full autonomous pipeline live. Discovery engine, enrichment worker, outreach bot, admin dashboard. 7-agent AI swarm. 5 playbooks. 17,596 active crypto entities. Production-hardened with 300+ learned patterns.</div>
       </div>
-      <div class="timeline-item current">
-        <div class="timeline-label">In Progress &mdash; Q2 2026</div>
-        <div class="timeline-title">Phase 2: Autonomous Discovery + 80K Entities</div>
-        <div class="timeline-desc">300+ standing queries for continuous cataloging. Aggregator diff detection (CMC, CoinGecko, DeFiLlama). New pair monitoring. Target: 80K entities with <7 day discovery latency.</div>
-      </div>
-      <div class="timeline-item future">
-        <div class="timeline-label">Q3 2026</div>
-        <div class="timeline-title">Phase 3: Multi-Tenant Platform Launch</div>
-        <div class="timeline-desc">First external customers. Self-service onboarding. Custom playbooks. Multi-source enrichment at scale. Target: 150K entities, 50+ paying customers, $500K ARR run rate.</div>
+      <div class="timeline-item active">
+        <div class="tl-label">→ In Progress — Q2 2026</div>
+        <div class="tl-title">Phase 2: Autonomous Discovery + 80K Entities</div>
+        <div class="tl-desc">300+ standing queries for continuous cataloging. Aggregator diff detection (CMC, CoinGecko, DeFiLlama). New pair monitoring. Target: 80K entities with &lt;7 day discovery latency.</div>
       </div>
       <div class="timeline-item future">
-        <div class="timeline-label">Q4 2026</div>
-        <div class="timeline-title">Phase 4: CryptoDB API Launch</div>
-        <div class="timeline-desc">REST API product. 20+ filter dimensions. Webhook subscriptions. TypeScript SDK. Bulk export. Target: 200K entities, 200+ API customers, $1.5M ARR run rate.</div>
+        <div class="tl-label">Q3 2026</div>
+        <div class="tl-title">Phase 3: Multi-Tenant Platform Launch</div>
+        <div class="tl-desc">First external customers. Self-service onboarding. Custom playbooks. Multi-source enrichment at scale. Target: 150K entities, 50+ paying customers, $500K ARR run rate.</div>
       </div>
       <div class="timeline-item future">
-        <div class="timeline-label">2027</div>
-        <div class="timeline-title">Phase 5-6: On-Chain Intelligence + Real-Time Streaming</div>
-        <div class="timeline-desc">Contract deployment monitoring across 8+ chains. Holder distribution analysis. Smart money signals. WebSocket API for sub-hour discovery. Target: 350K entities, $7M+ ARR.</div>
+        <div class="tl-label">Q4 2026</div>
+        <div class="tl-title">Phase 4: CryptoDB API Launch</div>
+        <div class="tl-desc">REST API product. 20+ filter dimensions. Webhook subscriptions. TypeScript SDK. Bulk export. Target: 200K entities, 200+ API customers, $1.5M ARR run rate.</div>
+      </div>
+      <div class="timeline-item future">
+        <div class="tl-label">2027</div>
+        <div class="tl-title">Phase 5–6: On-Chain Intelligence + Real-Time Streaming</div>
+        <div class="tl-desc">Contract deployment monitoring across 8+ chains. Holder distribution analysis. Smart money signals. WebSocket API for sub-hour discovery. Target: 350K entities, $7M+ ARR.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 12: FINANCIAL PROJECTIONS -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 12: FINANCIAL PROJECTIONS                    -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s12">
+  <div class="slide-glow" style="bottom:-50px;right:-50px;"></div>
   <div class="slide-inner">
-    <div class="slide-number">11 &mdash; Financial Projections</div>
-    <h2>Path to $100M+ valuation in 24 months</h2>
-    <p class="subtitle">Software-like margins with infrastructure-like defensibility. The database is a compounding asset that drives down acquisition costs and increases switching costs over time.</p>
+    <div class="slide-label anim">11 — Financial Projections</div>
+    <h2 class="anim anim-delay-1">Path to $120M+ valuation in 24 months.<br><span class="gold">Software margins. Infrastructure defensibility.</span></h2>
+    <p class="subtitle anim anim-delay-2">Software-like margins with infrastructure-like defensibility. The database is a compounding asset that drives down acquisition costs and increases switching costs over time.</p>
 
-    <div class="card" style="overflow-x:auto;">
+    <div class="card anim anim-delay-2" style="overflow-x:auto;">
       <table class="data-table">
         <thead>
           <tr>
-            <th></th>
-            <th style="text-align:center;">Q3 2026</th>
-            <th style="text-align:center;">Q4 2026</th>
-            <th style="text-align:center;">H1 2027</th>
-            <th style="text-align:center;">H2 2027</th>
+            <th>Metric</th>
+            <th>Q3 2026</th>
+            <th>Q4 2026</th>
+            <th>H1 2027</th>
+            <th>H2 2027</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td style="color:var(--white);font-weight:500;">Entities in DB</td>
-            <td style="text-align:center;">80K</td>
-            <td style="text-align:center;">150K</td>
-            <td style="text-align:center;">250K</td>
-            <td style="text-align:center;">350K</td>
-          </tr>
-          <tr>
-            <td style="color:var(--white);font-weight:500;">Platform customers</td>
-            <td style="text-align:center;">25</td>
-            <td style="text-align:center;">100</td>
-            <td style="text-align:center;">300</td>
-            <td style="text-align:center;">700</td>
-          </tr>
-          <tr>
-            <td style="color:var(--white);font-weight:500;">API customers</td>
-            <td style="text-align:center;">&mdash;</td>
-            <td style="text-align:center;">50</td>
-            <td style="text-align:center;">300</td>
-            <td style="text-align:center;">800</td>
-          </tr>
-          <tr>
-            <td style="color:var(--white);font-weight:500;">MRR</td>
-            <td style="text-align:center;">$25K</td>
-            <td style="text-align:center;">$125K</td>
-            <td style="text-align:center;">$450K</td>
-            <td style="text-align:center;">$1.0M</td>
-          </tr>
-          <tr>
-            <td style="color:var(--white);font-weight:600;">ARR (annualized)</td>
-            <td style="text-align:center;color:var(--gold);font-weight:700;">$300K</td>
-            <td style="text-align:center;color:var(--gold);font-weight:700;">$1.5M</td>
-            <td style="text-align:center;color:var(--gold);font-weight:700;">$5.4M</td>
-            <td style="text-align:center;color:var(--gold);font-weight:700;">$12M</td>
-          </tr>
-          <tr>
-            <td style="color:var(--white);font-weight:500;">Infra cost</td>
-            <td style="text-align:center;">$3K/mo</td>
-            <td style="text-align:center;">$5K/mo</td>
-            <td style="text-align:center;">$8K/mo</td>
-            <td style="text-align:center;">$12K/mo</td>
-          </tr>
-          <tr>
-            <td style="color:var(--white);font-weight:600;">Gross margin</td>
-            <td style="text-align:center;color:var(--gold);">88%</td>
-            <td style="text-align:center;color:var(--gold);">96%</td>
-            <td style="text-align:center;color:var(--gold);">98%</td>
-            <td style="text-align:center;color:var(--gold);">99%</td>
-          </tr>
+          <tr><td class="td-white">Entities in DB</td><td>80K</td><td>150K</td><td>250K</td><td>350K</td></tr>
+          <tr><td class="td-white">Platform customers</td><td>25</td><td>100</td><td>300</td><td>700</td></tr>
+          <tr><td class="td-white">API customers</td><td>—</td><td>50</td><td>300</td><td>800</td></tr>
+          <tr><td class="td-white">MRR</td><td>$25K</td><td>$125K</td><td>$450K</td><td class="td-gold">$1.0M</td></tr>
+          <tr class="highlight-row"><td>ARR (annualized)</td><td>$300K</td><td>$1.5M</td><td>$5.4M</td><td>$12M</td></tr>
+          <tr><td class="td-white">Infra cost</td><td>$3K/mo</td><td>$5K/mo</td><td>$8K/mo</td><td>$12K/mo</td></tr>
+          <tr class="highlight-row"><td>Gross margin</td><td>88%</td><td>96%</td><td>98%</td><td>99%</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="two-col" style="margin-top:24px;">
-      <div class="card">
-        <h3 style="font-size:14px;">Valuation Benchmarks</h3>
-        <ul class="bullet-list" style="margin-top:12px;">
-          <li><strong>Chainalysis:</strong> $8.6B at ~20x ARR (compliance analytics)</li>
-          <li><strong>Nansen:</strong> $750M at ~30x ARR (wallet analytics)</li>
-          <li><strong>Arkham:</strong> $150M+ at early revenue (on-chain intelligence)</li>
-          <li><strong>B2B SaaS median:</strong> 10-15x ARR for high-growth</li>
+    <div class="two-col anim anim-delay-3" style="margin-top:20px;">
+      <div>
+        <h3>Comparable Valuations</h3>
+        <ul class="bullet-list" style="margin-top:10px;">
+          <li><strong>Chainalysis:</strong> $2.5B valuation · $250M ARR · compliance analytics</li>
+          <li><strong>Nansen:</strong> $88M raised · Series B · wallet analytics</li>
+          <li><strong>Arkham:</strong> $150M+ at early revenue · on-chain intelligence</li>
+          <li><strong>B2B SaaS median:</strong> 10–15x ARR for high-growth companies</li>
         </ul>
-        <p style="font-size:14px;color:var(--gold);font-weight:600;margin-top:12px;">At $12M ARR x 10x multiple = $120M valuation by H2 2027</p>
+        <div class="callout" style="margin-top:14px;">
+          At <strong>$12M ARR × 10x multiple = $120M valuation</strong> by H2 2027
+        </div>
       </div>
-      <div class="card">
-        <h3 style="font-size:14px;">Why margins are exceptional</h3>
-        <ul class="bullet-list" style="margin-top:12px;">
-          <li><strong>Near-zero COGS:</strong> Infrastructure scales sublinearly. $4K/mo runs 500K entities</li>
-          <li><strong>Compounding data asset:</strong> Each customer query enriches the shared database. Pool reuse drives down per-lead cost to near zero over time</li>
-          <li><strong>AI cost curve:</strong> LLM costs drop 50-80% annually. Our unit economics improve automatically</li>
+      <div>
+        <h3>Why margins are exceptional</h3>
+        <ul class="bullet-list" style="margin-top:10px;">
+          <li><strong>Near-zero COGS:</strong> $4K/mo infrastructure runs 500K entities</li>
+          <li><strong>Compounding data:</strong> Pool reuse drives per-lead cost toward zero</li>
+          <li><strong>AI cost tailwind:</strong> LLM costs drop 50–80% annually — our economics improve automatically without any action on our part</li>
+          <li><strong>No sales team needed at launch:</strong> Product-led growth via the Assure DeFi network of 1,500+ verified projects</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 13: USE OF FUNDS -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 13: THE ASK                                  -->
+<!-- ══════════════════════════════════════════════════ -->
 <section class="slide" id="s13">
+  <div class="slide-glow" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
   <div class="slide-inner">
-    <div class="slide-number">12 &mdash; The Ask</div>
-    <h2>$2M seed round to capture a category</h2>
-    <p class="subtitle">External capital accelerates the inflection point. The product is built. The data asset is growing. Capital funds the go-to-market engine and database expansion needed to establish market dominance before competitors emerge.</p>
+    <div class="slide-label anim">12 — The Ask</div>
+    <h2 class="anim anim-delay-1">$2M seed round to capture a category<br><span class="gold">before anyone else can.</span></h2>
+    <p class="subtitle anim anim-delay-2">The product is built. The data asset is growing. Capital funds the go-to-market engine and database expansion needed to establish market dominance before competitors emerge.</p>
 
-    <div class="stats-grid stats-grid-4" style="margin-bottom:32px;">
-      <div class="stat" style="border-color:var(--gold);">
+    <div class="stats-grid stats-grid-4 anim anim-delay-2">
+      <div class="stat stat-gold">
         <div class="stat-value">$2M</div>
         <div class="stat-label">Raise target</div>
       </div>
@@ -1280,7 +1466,7 @@
       </div>
       <div class="stat">
         <div class="stat-value">$12M</div>
-        <div class="stat-label">ARR target at exit</div>
+        <div class="stat-label">ARR target at end of runway</div>
       </div>
       <div class="stat">
         <div class="stat-value">$120M+</div>
@@ -1288,189 +1474,231 @@
       </div>
     </div>
 
-    <h3>Allocation of funds</h3>
-    <div class="features-grid" style="margin-top:16px;">
-      <div class="feature-card">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-          <h4 style="margin:0;">Engineering &amp; Product</h4>
-          <span class="tag-solid">45%</span>
-        </div>
-        <p>Scale the engineering team (3-5 hires). Multi-tenant architecture. API product build. On-chain intelligence layer. Mobile app for sales teams.</p>
+    <h3 class="anim anim-delay-3" style="margin-top:24px;margin-bottom:14px;">Fund Allocation</h3>
+    <div class="anim anim-delay-3">
+      <div class="alloc-item">
+        <div class="alloc-label">Engineering &amp; Product</div>
+        <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:45%;"></div></div>
+        <div class="alloc-pct">45%</div>
       </div>
-      <div class="feature-card">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-          <h4 style="margin:0;">Database Expansion</h4>
-          <span class="tag-solid">20%</span>
-        </div>
-        <p>Scale from 17.5K to 350K entities. API costs for data providers. Seeder blitz across CoinGecko, DappRadar, RootData, DeFiLlama. On-chain monitoring infrastructure.</p>
+      <div class="alloc-item">
+        <div class="alloc-label">Go-to-Market</div>
+        <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:25%;"></div></div>
+        <div class="alloc-pct">25%</div>
       </div>
-      <div class="feature-card">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-          <h4 style="margin:0;">Go-to-Market</h4>
-          <span class="tag-solid">25%</span>
-        </div>
-        <p>Sales team (2-3 hires). Marketing and brand. Conference presence. Beta program. Strategic partnerships with audit firms, VCs, launchpads, and exchanges.</p>
+      <div class="alloc-item">
+        <div class="alloc-label">Database Expansion</div>
+        <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:20%;"></div></div>
+        <div class="alloc-pct">20%</div>
       </div>
-      <div class="feature-card">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-          <h4 style="margin:0;">Operations &amp; Reserve</h4>
-          <span class="tag-solid">10%</span>
-        </div>
-        <p>Legal, compliance, cloud infrastructure, working capital buffer. Maintain 6-month cash reserve at all times.</p>
+      <div class="alloc-item">
+        <div class="alloc-label">Operations &amp; Reserve</div>
+        <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:10%;"></div></div>
+        <div class="alloc-pct">10%</div>
       </div>
     </div>
 
-    <div class="card card-gold" style="margin-top:24px;">
-      <h3 style="font-size:16px;margin-bottom:12px;">Why capital is needed now</h3>
-      <ul class="bullet-list">
-        <li><strong>Window of opportunity:</strong> No dominant player in crypto BD intelligence. First-mover who captures 350K entities with production-quality data wins the category</li>
-        <li><strong>Data compounding:</strong> Every month of delay is a month competitors could start building. Our 17.5K entity head start and classification IP are temporary advantages without scale</li>
-        <li><strong>Customer demand:</strong> Assure DeFi's existing network of 1,500+ projects and industry partners are ready-made design partners and early customers</li>
-        <li><strong>AI cost tailwinds:</strong> LLM inference costs dropping 50-80% annually means the same budget buys dramatically more enrichment next quarter</li>
-      </ul>
+    <div class="card card-highlight anim anim-delay-4" style="margin-top:20px;">
+      <h4 style="color:var(--gold);margin-bottom:12px;">Why now — the window is open, but it won't stay open</h4>
+      <div class="two-col" style="gap:14px;">
+        <ul class="bullet-list">
+          <li><strong>No dominant player exists</strong> in crypto BD intelligence. First-mover who captures 350K entities with production-quality data wins the category.</li>
+          <li><strong>Data compounding:</strong> Every month of delay is a month competitors could start building. Our 17.5K entity head start is a temporary advantage without scale.</li>
+        </ul>
+        <ul class="bullet-list">
+          <li><strong>Customer demand is ready:</strong> 1,500+ verified projects and industry partners are ready-made design partners and early customers — no cold acquisition needed.</li>
+          <li><strong>AI cost tailwinds:</strong> LLM inference costs dropping 50–80% annually means the same budget buys dramatically more enrichment next quarter.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 14: VISION -->
-<!-- ═══════════════════════════════════════════════ -->
-<section class="slide" id="s14">
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 14: THE VISION                               -->
+<!-- ══════════════════════════════════════════════════ -->
+<section class="slide" id="s14" style="text-align:center;">
+  <div class="slide-glow" style="top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;"></div>
   <div class="slide-inner">
-    <div class="slide-number">13 &mdash; The Vision</div>
-    <h2>The picks and shovels of crypto business</h2>
-    <p class="subtitle">In every gold rush, the biggest winners sell the tools. Connect is infrastructure &mdash; the data layer and intelligence engine that every crypto company needs but no one has built yet.</p>
+    <div class="slide-label anim" style="justify-content:center;">13 — The Vision</div>
+    <h2 class="anim anim-delay-1" style="font-size:clamp(28px,5vw,52px);">The picks and shovels of crypto business.</h2>
 
-    <div class="quote-block" style="margin:24px 0;">
-      <p style="font-size:clamp(16px,2.5vw,20px);">"We're not building a tool. We're building the definitive database of every crypto entity on earth &mdash; and the AI that knows how to talk to each one. That's not a feature. That's a category."</p>
+    <div class="quote-block anim anim-delay-2" style="text-align:left;max-width:720px;margin:24px auto;">
+      <p style="font-size:clamp(16px,2.5vw,20px);">"We're not building a tool. We're building the definitive database of every crypto entity on earth — and the AI that knows how to talk to each one. That's not a feature. That's a category."</p>
     </div>
 
-    <div class="features-grid" style="margin-top:24px;">
-      <div class="feature-card" style="border-color:var(--gold);">
-        <h4 style="color:var(--gold);">Today: The Engine</h4>
-        <p>Production-grade autonomous BD system powering Assure DeFi's sales pipeline. 17.5K entities, 7-agent AI swarm, 95% classification accuracy. The hard part &mdash; making it work &mdash; is done.</p>
+    <div class="vision-grid anim anim-delay-3" style="text-align:left;margin-top:24px;">
+      <div class="vision-card">
+        <div class="v-stage">Today</div>
+        <h4>The Engine</h4>
+        <p>Production-grade autonomous BD system powering Assure DeFi's sales pipeline. 17.5K entities, 7-agent AI swarm, 95% classification accuracy. The hard part — making it work — is done.</p>
       </div>
-      <div class="feature-card" style="border-color:var(--gold);">
-        <h4 style="color:var(--gold);">Tomorrow: The Platform</h4>
-        <p>Multi-tenant SaaS where any crypto company can plug in their business context and let autonomous agents handle discovery, research, and outreach at a fraction of the cost of a human BD team.</p>
+      <div class="vision-card">
+        <div class="v-stage">Tomorrow</div>
+        <h4>The Platform</h4>
+        <p>Multi-tenant SaaS where any crypto company plugs in their business context and lets autonomous agents handle discovery, research, and outreach at a fraction of the cost of a human BD team.</p>
       </div>
-      <div class="feature-card" style="border-color:var(--gold);">
-        <h4 style="color:var(--gold);">The Endgame: The Data Layer</h4>
-        <p>The universal crypto entity database &mdash; 350K+ projects with 150+ data fields, real-time updates, on-chain intelligence, and API access. The Bloomberg Terminal of crypto. Infrastructure that every participant in the ecosystem depends on.</p>
+      <div class="vision-card">
+        <div class="v-stage">The Endgame</div>
+        <h4>The Data Layer</h4>
+        <p>The universal crypto entity database — 350K+ projects with 150+ data fields, real-time updates, on-chain intelligence, and API access. The Bloomberg Terminal of crypto. Infrastructure every participant depends on.</p>
       </div>
     </div>
 
-    <div class="spacer"></div>
-
-    <div class="cta-block">
+    <div class="cta-block anim anim-delay-4" style="margin-top:28px;">
       <h3>Invest in the infrastructure layer of crypto business</h3>
-      <p style="color:var(--grey);margin-bottom:16px;">Connect by Assure DeFi &mdash; where 5 years of trust meets the agentic future of sales</p>
-      <div style="margin-top:16px;">
-        <span class="tag" style="font-size:14px;">jeff@assuredefi.com</span>
-        <span class="tag" style="font-size:14px;">assuredefi.com</span>
+      <p>Connect by Assure DeFi — where 5 years of trust meets the agentic future of sales</p>
+      <p style="margin-top:10px;font-size:15px;font-weight:600;color:var(--gold);">jeff@assuredefi.com &nbsp;·&nbsp; assuredefi.com</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SLIDE 15: APPENDIX                                 -->
+<!-- ══════════════════════════════════════════════════ -->
+<section class="slide" id="s15">
+  <div class="slide-inner">
+    <div class="slide-label anim">Appendix — Technical Architecture</div>
+    <h2 class="anim anim-delay-1" style="font-size:clamp(22px,3.5vw,36px);">System Architecture &amp; Cost Efficiency</h2>
+
+    <div class="two-col anim anim-delay-2" style="margin-top:20px;">
+      <div>
+        <h3 style="font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:10px;">System Architecture</h3>
+        <div class="card" style="overflow-x:auto;">
+          <table class="data-table">
+            <thead><tr><th>Service</th><th>Stack</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td class="td-white">Discovery Engine</td><td>Express + TS</td><td>7-agent AI swarm, 20+ adapters</td></tr>
+              <tr><td class="td-white">Sales Worker</td><td>Node.js + TS</td><td>Grok LLM enrichment, scoring, DMs</td></tr>
+              <tr><td class="td-white">Outreach Bot</td><td>Node.js + TS</td><td>DM sending, reply tracking</td></tr>
+              <tr><td class="td-white">Dashboard</td><td>Next.js 14</td><td>Admin UI, analytics, conversations</td></tr>
+              <tr><td class="td-white">Database</td><td>PostgreSQL</td><td>Single source of truth, 15+ tables</td></tr>
+              <tr><td class="td-white">Queue</td><td>Redis</td><td>Job queues between services</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin:16px 0 10px;">AI &amp; Data Stack</h3>
+        <div class="card" style="overflow-x:auto;">
+          <table class="data-table">
+            <thead><tr><th>Layer</th><th>Provider</th><th>Use</th></tr></thead>
+            <tbody>
+              <tr><td class="td-white">Enrichment LLM</td><td>Grok-4 (xAI)</td><td>Account summaries, classification</td></tr>
+              <tr><td class="td-white">DM Generation</td><td>Claude Sonnet</td><td>Personalized outreach messages</td></tr>
+              <tr><td class="td-white">Twitter Data</td><td>twitterapi.io + Apify</td><td>Profile lookup, bio search</td></tr>
+              <tr><td class="td-white">Token Data</td><td>CMC + CoinGecko + DEX</td><td>Market data, symbol validation</td></tr>
+              <tr><td class="td-white">DM Sending</td><td>InboxApp + X API v2</td><td>Primary + fallback channels</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:10px;">Cost Efficiency at Scale</h3>
+        <div class="card" style="overflow-x:auto;">
+          <table class="data-table">
+            <thead><tr><th>DB Scale</th><th>Discovery</th><th>Infra</th><th>Total/mo</th></tr></thead>
+            <tbody>
+              <tr class="highlight-row"><td>10K (today)</td><td>$860</td><td>$355</td><td>$600</td></tr>
+              <tr><td>50K</td><td>$400</td><td>$395</td><td>$1,320</td></tr>
+              <tr><td>100K</td><td>$300</td><td>$655</td><td>$1,905</td></tr>
+              <tr><td>500K</td><td>$200</td><td>$965</td><td>$4,165</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin:16px 0 10px;">CryptoDB API Pricing</h3>
+        <div class="card" style="overflow-x:auto;">
+          <table class="data-table">
+            <thead><tr><th>Plan</th><th>Price/mo</th><th>Req/day</th></tr></thead>
+            <tbody>
+              <tr><td class="td-white">Starter</td><td>$29</td><td>200</td></tr>
+              <tr><td class="td-white">Growth</td><td>$149</td><td>5,000</td></tr>
+              <tr><td class="td-white">Scale</td><td>$499</td><td>50,000</td></tr>
+              <tr><td class="td-white">Enterprise</td><td>Custom</td><td>Custom</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:14px;">
+          <strong>Infrastructure scales sublinearly.</strong> Going from 10K to 500K entities (50x scale) only increases monthly cost by 7x — while revenue potential increases 50x.
+        </div>
       </div>
     </div>
 
-    <div class="footer-confidential">
-      Confidential &mdash; Do not distribute without permission &mdash; Assure DeFi LLC &mdash; 2026
-    </div>
+    <div class="footer-conf" style="margin-top:28px;">Confidential — Do not distribute without permission — Assure DeFi LLC — 2026 — jeff@assuredefi.com</div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- SLIDE 15: APPENDIX -->
-<!-- ═══════════════════════════════════════════════ -->
-<section class="slide" id="s15" style="min-height:auto;padding-bottom:64px;">
-  <div class="slide-inner">
-    <div class="slide-number">Appendix</div>
-    <h2>Technical Architecture &amp; System Details</h2>
-
-    <div class="card" style="margin-top:24px;">
-      <h3 style="font-size:14px;">System Architecture</h3>
-      <table class="data-table">
-        <thead><tr><th>Service</th><th>Stack</th><th>Deploy</th><th>Purpose</th></tr></thead>
-        <tbody>
-          <tr><td style="color:var(--gold);">Discovery Engine</td><td>Express + TypeScript</td><td>Railway</td><td>7-agent AI swarm, 20+ data adapters</td></tr>
-          <tr><td style="color:var(--gold);">Sales Worker</td><td>Node.js + TypeScript</td><td>Railway</td><td>Grok LLM enrichment, scoring, DM generation</td></tr>
-          <tr><td style="color:var(--gold);">Outreach Bot</td><td>Node.js + TypeScript</td><td>Railway</td><td>DM sending via InboxApp/X API, reply tracking</td></tr>
-          <tr><td style="color:var(--gold);">Dashboard</td><td>Next.js 14 + React</td><td>Vercel</td><td>Admin UI, analytics, conversation management</td></tr>
-          <tr><td style="color:var(--gold);">Database</td><td>PostgreSQL</td><td>Supabase</td><td>Single source of truth, 15+ tables</td></tr>
-          <tr><td style="color:var(--gold);">Queue</td><td>Redis</td><td>Upstash</td><td>Job queues between services</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="card">
-      <h3 style="font-size:14px;">AI &amp; Data Stack</h3>
-      <table class="data-table">
-        <thead><tr><th>Layer</th><th>Provider</th><th>Use</th></tr></thead>
-        <tbody>
-          <tr><td style="color:var(--white);">Enrichment LLM</td><td>Grok-4 (xAI)</td><td>Account summaries, entity classification</td></tr>
-          <tr><td style="color:var(--white);">DM Generation LLM</td><td>Claude Sonnet (OpenRouter)</td><td>Personalized outreach messages</td></tr>
-          <tr><td style="color:var(--white);">Twitter Data</td><td>twitterapi.io + Apify</td><td>Profile lookup, bio search, tweet search</td></tr>
-          <tr><td style="color:var(--white);">Token Data</td><td>CoinMarketCap + CoinGecko + DexScreener</td><td>Market data, symbol validation</td></tr>
-          <tr><td style="color:var(--white);">DM Sending</td><td>InboxApp + X API v2</td><td>Primary + fallback channels</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="card">
-      <h3 style="font-size:14px;">Cost Efficiency at Scale</h3>
-      <table class="data-table">
-        <thead><tr><th>DB Scale</th><th>Discovery</th><th>Enrichment</th><th>Refresh</th><th>Infra</th><th>Total/mo</th></tr></thead>
-        <tbody>
-          <tr><td style="color:var(--gold);">10K (today)</td><td>$860</td><td>incl.</td><td>$100</td><td>$355</td><td style="color:var(--gold);font-weight:600;">$600</td></tr>
-          <tr><td style="color:var(--gold);">50K</td><td>$400</td><td>$125</td><td>$400</td><td>$395</td><td style="color:var(--gold);font-weight:600;">$1,320</td></tr>
-          <tr><td style="color:var(--gold);">100K</td><td>$300</td><td>$250</td><td>$700</td><td>$655</td><td style="color:var(--gold);font-weight:600;">$1,905</td></tr>
-          <tr><td style="color:var(--gold);">500K</td><td>$200</td><td>$500</td><td>$2,500</td><td>$965</td><td style="color:var(--gold);font-weight:600;">$4,165</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="card">
-      <h3 style="font-size:14px;">CryptoDB API Pricing (Phase 4)</h3>
-      <table class="data-table">
-        <thead><tr><th>Plan</th><th>Price/mo</th><th>Requests/day</th><th>Key Features</th></tr></thead>
-        <tbody>
-          <tr><td style="color:var(--white);font-weight:500;">Starter</td><td style="color:var(--gold);">$29</td><td>200</td><td>Identity, social, market, classification</td></tr>
-          <tr><td style="color:var(--white);font-weight:500;">Growth</td><td style="color:var(--gold);">$149</td><td>5,000</td><td>+ Team, funding, LLM intelligence</td></tr>
-          <tr><td style="color:var(--white);font-weight:500;">Scale</td><td style="color:var(--gold);">$499</td><td>50,000</td><td>+ Sales DMs, raw data, bulk export</td></tr>
-          <tr><td style="color:var(--white);font-weight:500;">Enterprise</td><td style="color:var(--gold);">Custom</td><td>Custom</td><td>Custom limits, dedicated support</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="footer-confidential" style="margin-top:48px;">
-      Confidential &mdash; Connect by Assure DeFi &mdash; Investor Deck v1.0 &mdash; March 2026
-    </div>
-  </div>
-</section>
-
+<!-- ══════════════════════════════════════════════════ -->
+<!-- JAVASCRIPT                                         -->
+<!-- ══════════════════════════════════════════════════ -->
 <script>
-// Navigation dots
-const slides = document.querySelectorAll('.slide');
-const navDots = document.getElementById('navDots');
+(function(){
+  const TOTAL = 15;
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const navDots = document.getElementById('navDots');
+  const counter = document.getElementById('slideCounter');
+  const progress = document.getElementById('readingProgress');
 
-slides.forEach((slide, i) => {
-  const dot = document.createElement('div');
-  dot.className = 'nav-dot';
-  dot.addEventListener('click', () => slide.scrollIntoView({ behavior: 'smooth' }));
-  navDots.appendChild(dot);
-});
+  // Build nav dots
+  slides.forEach((slide, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'nav-dot';
+    btn.setAttribute('aria-label', 'Go to slide ' + (i+1));
+    btn.title = 'Slide ' + (i+1);
+    btn.addEventListener('click', () => {
+      slide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    navDots.appendChild(btn);
+  });
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const idx = Array.from(slides).indexOf(entry.target);
-      document.querySelectorAll('.nav-dot').forEach((d, i) => {
-        d.classList.toggle('active', i === idx);
-      });
+  const dots = Array.from(navDots.querySelectorAll('.nav-dot'));
+
+  // Intersection observer for active state + animations
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = slides.indexOf(entry.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        counter.textContent = (idx + 1) + ' / ' + TOTAL;
+        // Animate children
+        entry.target.querySelectorAll('.anim').forEach(el => el.classList.add('visible'));
+      }
+    });
+  }, { threshold: 0.3 });
+
+  slides.forEach(s => io.observe(s));
+
+  // Reading progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progress.style.width = pct + '%';
+  }, { passive: true });
+
+  // Keyboard navigation
+  window.addEventListener('keydown', e => {
+    const current = slides.findIndex(s => {
+      const rect = s.getBoundingClientRect();
+      return rect.top <= 100 && rect.bottom > 100;
+    });
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown') {
+      e.preventDefault();
+      const next = Math.min(current + 1, slides.length - 1);
+      slides[next].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      const prev = Math.max(current - 1, 0);
+      slides[prev].scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
-}, { threshold: 0.4 });
 
-slides.forEach(s => observer.observe(s));
+  // Trigger animations for first slide on load
+  setTimeout(() => {
+    slides[0].querySelectorAll('.anim').forEach(el => el.classList.add('visible'));
+  }, 100);
+})();
 </script>
-
 </body>
 </html>
